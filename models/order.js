@@ -82,9 +82,17 @@ orderSchema.methods.setItemQty = function (itemId, newQty) {
 	const lineItem = cart.lineItems.find((lineItem) =>
 		lineItem.item._id.equals(itemId)
 	);
+	//! I added this
+	const lineItemIndex = cart.lineItems.findIndex((lineItem) =>
+		lineItem.item._id.equals(itemId)
+	);
 	if (lineItem && newQty <= 0) {
 		// Calling remove, removes itself from the cart.lineItems array
-		lineItem.remove();
+		// console.log(cart.lineItems);
+		console.log(lineItemIndex);
+		console.log(lineItem);
+		cart.lineItems.splice(lineItemIndex, 1); // ! would it matter if it changes the index of other items in current order
+		// lineItem.remove(); //!splice this ?
 	} else if (lineItem) {
 		// Set the new qty - positive value is assured thanks to prev if
 		lineItem.qty = newQty;

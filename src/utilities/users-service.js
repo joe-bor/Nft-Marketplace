@@ -34,6 +34,9 @@ export function getToken() {
 export function getUser() {
 	const token = getToken();
 	return token ? JSON.parse(atob(token.split('.')[1])).user : null;
+	// if there is a token -> split @ '.' returns [ <header> , <payload>, <signature>]
+	// [1] = payload -> atob() to decode it
+	// then parse it to an Object and access user property
 }
 
 export function logOut() {

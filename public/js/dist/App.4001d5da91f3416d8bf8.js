@@ -682,11 +682,14 @@ function NewOrderPage(_ref) {
     function _getItems() {
       _getItems = _asyncToGenerator(function* () {
         const items = yield _utilities_items_api__WEBPACK_IMPORTED_MODULE_8__.getAll();
+        // iterate over all the items, and grab unique categories -> store them in the array
         categoriesRef.current = items.reduce((cats, item) => {
           const cat = item.category.name;
           return cats.includes(cat) ? cats : [...cats, cat];
         }, []);
         setMenuItems(items);
+        // we use the first category in the array returned by .reduce above
+        // set it to activeCat state
         setActiveCat(categoriesRef.current[0]);
       });
       return _getItems.apply(this, arguments);
@@ -1056,7 +1059,11 @@ function getToken() {
 function getUser() {
   const token = getToken();
   return token ? JSON.parse(atob(token.split('.')[1])).user : null;
+  // if there is a token -> split @ '.' returns [ <header> , <payload>, <signature>]
+  // [1] = payload -> atob() to decode it
+  // then parse it to an Object and access user property
 }
+
 function logOut() {
   localStorage.removeItem('token');
 }
@@ -2635,4 +2642,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.556ae11459c1afe416ff8df65d293031.js.map
+//# sourceMappingURL=App.c369728bd258efc8fed9b84cc01b7117.js.map

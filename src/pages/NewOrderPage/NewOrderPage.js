@@ -19,11 +19,14 @@ export default function NewOrderPage({ user, setUser }) {
 	useEffect(function () {
 		async function getItems() {
 			const items = await itemsAPI.getAll();
+			// iterate over all the items, and grab unique categories -> store them in the array
 			categoriesRef.current = items.reduce((cats, item) => {
 				const cat = item.category.name;
 				return cats.includes(cat) ? cats : [...cats, cat];
 			}, []);
 			setMenuItems(items);
+			// we use the first category in the array returned by .reduce above
+			// set it to activeCat state
 			setActiveCat(categoriesRef.current[0]);
 		}
 		getItems();

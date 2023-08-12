@@ -23,8 +23,8 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 			trim: true,
-			minlength: 5,
-			match: /^(?=.*[!@#$%^&*()-])/
+			minlength: 5
+			// match: /^(?=.*[!@#$%^&*()-])/ //! comment out till i figure out how to show error to user
 		}
 	},
 	{
