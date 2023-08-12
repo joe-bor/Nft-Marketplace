@@ -17,7 +17,8 @@ module.exports = (env) => {
 		output: {
 			path: path.resolve(__dirname, 'public/js/dist'),
 			filename: '[name].[contenthash].js', // '[name].[contenthash].js' put this if you want to get hashed files to cache bust
-			sourceMapFilename: '[name].[contenthash].js.map'
+			sourceMapFilename: '[name].[contenthash].js.map',
+			publicPath: '/js/dist'
 		},
 		devtool: 'source-map',
 		module: {

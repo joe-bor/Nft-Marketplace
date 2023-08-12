@@ -71,9 +71,7 @@ export default class SignUpForm extends Component {
 							onChange={this.handleChange}
 							required
 							minLength={5}
-							pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*()-]).{5,}$"
 							title="Password must contain at least 5 characters,&#13;
-							at least one number,&#13;
 							at least one special character (!@#$%^&*()-)"
 						/>
 						<label>Confirm</label>
