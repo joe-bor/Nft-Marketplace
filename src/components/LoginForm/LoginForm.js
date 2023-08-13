@@ -34,6 +34,7 @@ export default function LoginForm({ setUser }) {
 				<form autoComplete="off" onSubmit={handleSubmit}>
 					<label>Email</label>
 					<input
+						autoFocus
 						type="text"
 						name="email"
 						value={credentials.email}

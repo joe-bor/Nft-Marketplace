@@ -60,7 +60,7 @@ orderSchema.statics.getCart = function (userId) {
 orderSchema.methods.addItemToCart = async function (itemId) {
 	const cart = this;
 	// Check if item already in cart
-	//! returns true if item exist in cart/order, else false -> search with item._id
+	//! returns the elem found, else null
 	const lineItem = cart.lineItems.find((lineItem) =>
 		lineItem.item._id.equals(itemId)
 	);
@@ -69,7 +69,8 @@ orderSchema.methods.addItemToCart = async function (itemId) {
 	} else {
 		// query the Items db and add it to cart
 		const item = await model('Item').findById(itemId);
-		cart.lineItems.push({ item });
+		// console.log(item);
+		cart.lineItems.addToSet({ item }); //! changed push to addToSet
 	}
 	return cart.save();
 };

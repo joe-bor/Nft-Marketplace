@@ -143,6 +143,7 @@ function LoginForm(_ref) {
     autoComplete: "off",
     onSubmit: handleSubmit
   }, /*#__PURE__*/React.createElement("label", null, "Email"), /*#__PURE__*/React.createElement("input", {
+    autoFocus: true,
     type: "text",
     name: "email",
     value: credentials.email,
@@ -2642,4 +2643,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.c369728bd258efc8fed9b84cc01b7117.js.map
+//# sourceMappingURL=App.5027ba340580ea19aaba81dd2358dbe7.js.map
