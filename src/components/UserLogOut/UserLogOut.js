@@ -7,13 +7,31 @@ export default function UserLogOut({ user, setUser }) {
 		setUser(null);
 	}
 
+	function getGreeting() {
+		const currentHour = new Date().getHours();
+
+		if (currentHour >= 6 && currentHour < 12) {
+			return 'Good morning';
+		} else if (currentHour >= 12 && currentHour < 18) {
+			return 'Good afternoon';
+		} else {
+			return 'Good evening';
+		}
+	}
+
 	return (
-		<div className={styles.UserLogOut}>
-			<div>{user.name}</div>
-			<div className={styles.email}>{user.email}</div>
-			<button className="btn-sm" onClick={handleLogOut}>
-				LOG OUT
-			</button>
-		</div>
+		<>
+			<div className={styles.welcome}>
+				<div>
+					{getGreeting()}, {user.name} !
+				</div>
+				<div className={styles.email}>{user.email}</div>
+			</div>
+			<div className={styles.UserLogOut}>
+				<button className="btn-sm" onClick={handleLogOut}>
+					LOG OUT
+				</button>
+			</div>
+		</>
 	);
 }

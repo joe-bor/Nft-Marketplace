@@ -1,0 +1,43 @@
+.NavBar {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(225, 109, 26);
+    height: 4rem;
+    border-radius: 1vmin;
+    z-index: 3;
+}
+
+.title {
+    font-size:  5vmin;
+    margin: 1vmin 1vmin;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.buttons {
+    font-size: 1.5vmin;
+    text-align: center;
+    margin-left: auto;
+    height: 2.5rem;
+    padding: 0 1.5rem;
+    background-color: var(--tan-1);
+    color: var(--text-light);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.buttons:hover {
+    background-color: var(--tan-4);
+    color: var(--text-dark);
+    transform: scale(1.05);
+}
+
+.hidden {
+    visibility: hidden;
+}
