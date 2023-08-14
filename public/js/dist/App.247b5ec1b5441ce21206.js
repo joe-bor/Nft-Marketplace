@@ -265,8 +265,14 @@ function MenuListItem(_ref) {
 function NavBar(_ref) {
   let {
     user,
-    setUser
+    setUser,
+    showLogin,
+    setShowLogin
   } = _ref;
+  function handleAuthToggle(e) {
+    setShowLogin(!showLogin);
+  }
+  const disableButton = showLogin ? true : false;
   return /*#__PURE__*/React.createElement("div", {
     className: _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].NavBar
   }, /*#__PURE__*/React.createElement("h1", {
@@ -274,12 +280,16 @@ function NavBar(_ref) {
   }, "NFT MARKETPLACE"), /*#__PURE__*/React.createElement("div", {
     className: _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].buttonContainer
   }, /*#__PURE__*/React.createElement("button", {
-    className: user ? _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].hidden : _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].buttons
+    className: user ? _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].hidden : _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].buttons,
+    onClick: handleAuthToggle,
+    disabled: !disableButton
   }, "Sign Up"), user ? /*#__PURE__*/React.createElement(_UserLogOut_UserLogOut__WEBPACK_IMPORTED_MODULE_1__["default"], {
     user: user,
     setUser: setUser
   }) : /*#__PURE__*/React.createElement("button", {
-    className: _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].buttons
+    className: _NavBar_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].buttons,
+    onClick: handleAuthToggle,
+    disabled: disableButton
   }, "Login")));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
@@ -623,11 +633,14 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createEle
 
 function App() {
   const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utilities_users_service__WEBPACK_IMPORTED_MODULE_6__.getUser)());
+  const [showLogin, setShowLogin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
     className: _App_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].App
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_NavBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
     user: user,
-    setUser: setUser
+    setUser: setUser,
+    setShowLogin: setShowLogin,
+    showLogin: showLogin
   }), user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/orders/new",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NewOrderPage_NewOrderPage__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -646,7 +659,8 @@ function App() {
       to: "/orders/new"
     })
   }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AuthPage_AuthPage__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    setUser: setUser
+    setUser: setUser,
+    showLogin: showLogin
   }));
 }
 
@@ -661,30 +675,23 @@ function App() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ AuthPage)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _AuthPage_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthPage.module.scss */ "./src/pages/AuthPage/AuthPage.module.scss");
-/* harmony import */ var _components_LoginForm_LoginForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/LoginForm/LoginForm */ "./src/components/LoginForm/LoginForm.js");
-/* harmony import */ var _components_SignUpForm_SignUpForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/SignUpForm/SignUpForm */ "./src/components/SignUpForm/SignUpForm.js");
-/* harmony import */ var _components_Logo_Logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Logo/Logo */ "./src/components/Logo/Logo.js");
+/* harmony import */ var _AuthPage_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthPage.module.scss */ "./src/pages/AuthPage/AuthPage.module.scss");
+/* harmony import */ var _components_LoginForm_LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/LoginForm/LoginForm */ "./src/components/LoginForm/LoginForm.js");
+/* harmony import */ var _components_SignUpForm_SignUpForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/SignUpForm/SignUpForm */ "./src/components/SignUpForm/SignUpForm.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
 
 
 
 function AuthPage(_ref) {
   let {
-    setUser
+    setUser,
+    showLogin
   } = _ref;
-  const [showLogin, setShowLogin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   return /*#__PURE__*/React.createElement("main", {
-    className: _AuthPage_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].AuthPage
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_components_Logo_Logo__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/React.createElement("h3", {
-    onClick: () => setShowLogin(!showLogin)
-  }, showLogin ? 'SIGN UP' : 'LOG IN')), showLogin ? /*#__PURE__*/React.createElement(_components_LoginForm_LoginForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: _AuthPage_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].AuthPage
+  }, showLogin ? /*#__PURE__*/React.createElement(_components_LoginForm_LoginForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     setUser: setUser
-  }) : /*#__PURE__*/React.createElement(_components_SignUpForm_SignUpForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }) : /*#__PURE__*/React.createElement(_components_SignUpForm_SignUpForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     setUser: setUser
   }));
 }
@@ -1428,7 +1435,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.QpVD3qAS0nYBtoQqAYoe {
   background-color: rgb(225, 109, 26);
   height: 4rem;
   border-radius: 1vmin;
-  z-index: 3;
+  margin-top: -1vmin;
 }
 
 .yO6peHgUWkLrjEeOxzNq {
@@ -1464,7 +1471,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.QpVD3qAS0nYBtoQqAYoe {
 
 .pGuXSjiAF9ReSU4SwCSk {
   visibility: hidden;
-}`, "",{"version":3,"sources":["webpack://./src/components/NavBar/NavBar.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,mBAAA;EACA,mCAAA;EACA,YAAA;EACA,oBAAA;EACA,UAAA;AACJ;;AAEA;EACI,gBAAA;EACA,mBAAA;AACJ;;AAEA;EACI,aAAA;EACA,mBAAA;EACA,iBAAA;AACJ;;AAEA;EACI,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,cAAA;EACA,iBAAA;EACA,8BAAA;EACA,wBAAA;EACA,YAAA;EACA,qBAAA;EACA,eAAA;EACA,4EAAA;AACJ;;AAEA;EACI,8BAAA;EACA,uBAAA;EACA,sBAAA;AACJ;;AAEA;EACI,kBAAA;AACJ","sourcesContent":[".NavBar {\n    display: flex;\n    flex-direction: row;\n    background-color: rgb(225, 109, 26);\n    height: 4rem;\n    border-radius: 1vmin;\n    z-index: 3;\n}\n\n.title {\n    font-size:  5vmin;\n    margin: 1vmin 1vmin;\n}\n\n.buttonContainer {\n    display: flex;\n    align-items: center;\n    margin-left: auto;\n}\n\n.buttons {\n    font-size: 1.5vmin;\n    text-align: center;\n    margin-left: auto;\n    height: 2.5rem;\n    padding: 0 1.5rem;\n    background-color: var(--tan-1);\n    color: var(--text-light);\n    border: none;\n    border-radius: 0.5rem;\n    cursor: pointer;\n    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;\n}\n\n.buttons:hover {\n    background-color: var(--tan-4);\n    color: var(--text-dark);\n    transform: scale(1.05);\n}\n\n.hidden {\n    visibility: hidden;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/NavBar/NavBar.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,mBAAA;EACA,mCAAA;EACA,YAAA;EACA,oBAAA;EACA,kBAAA;AACJ;;AAEA;EACI,gBAAA;EACA,mBAAA;AACJ;;AAEA;EACI,aAAA;EACA,mBAAA;EACA,iBAAA;AACJ;;AAEA;EACI,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,cAAA;EACA,iBAAA;EACA,8BAAA;EACA,wBAAA;EACA,YAAA;EACA,qBAAA;EACA,eAAA;EACA,4EAAA;AACJ;;AAEA;EACI,8BAAA;EACA,uBAAA;EACA,sBAAA;AACJ;;AAEA;EACI,kBAAA;AACJ","sourcesContent":[".NavBar {\n    display: flex;\n    flex-direction: row;\n    background-color: rgb(225, 109, 26);\n    height: 4rem;\n    border-radius: 1vmin;\n    margin-top: -1vmin;\n}\n\n.title {\n    font-size:  5vmin;\n    margin: 1vmin 1vmin;\n}\n\n.buttonContainer {\n    display: flex;\n    align-items: center;\n    margin-left: auto;\n}\n\n.buttons {\n    font-size: 1.5vmin;\n    text-align: center;\n    margin-left: auto;\n    height: 2.5rem;\n    padding: 0 1.5rem;\n    background-color: var(--tan-1);\n    color: var(--text-light);\n    border: none;\n    border-radius: 0.5rem;\n    cursor: pointer;\n    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;\n}\n\n.buttons:hover {\n    background-color: var(--tan-4);\n    color: var(--text-dark);\n    transform: scale(1.05);\n}\n\n.hidden {\n    visibility: hidden;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"NavBar": `QpVD3qAS0nYBtoQqAYoe`,
@@ -1719,8 +1726,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.ncLgupkhPNit1w0VMAKq {
   height: 100%;
-  z-index: 2;
-}`, "",{"version":3,"sources":["webpack://./src/pages/App/App.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,UAAA;AACJ","sourcesContent":[".App {\n    height: 100%;\n    z-index: 2;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/App/App.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;AACJ","sourcesContent":[".App {\n    height: 100%;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"App": `ncLgupkhPNit1w0VMAKq`
@@ -1749,7 +1755,7 @@ ___CSS_LOADER_EXPORT___.locals = {
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.RygkJgZmBHTETlLP3C3i {
-  height: 90%;
+  height: 93%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -1762,7 +1768,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.RygkJgZmBHTETlLP3C3i {
   text-align: center;
   color: var(--text-light);
   cursor: pointer;
-}`, "",{"version":3,"sources":["webpack://./src/pages/AuthPage/AuthPage.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEA;EACI,iBAAA;EACA,kBAAA;EACA,wBAAA;EACA,eAAA;AACJ","sourcesContent":[".AuthPage {\n    height: 90%;\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    background-color: var(--white);\n    border-radius: 2vmin;\n}\n\n.AuthPage h3 {\n    margin-top: 4vmin;\n    text-align: center;\n    color: var(--text-light);\n    cursor: pointer;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/AuthPage/AuthPage.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEA;EACI,iBAAA;EACA,kBAAA;EACA,wBAAA;EACA,eAAA;AACJ","sourcesContent":[".AuthPage {\n    height: 93%;\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    background-color: var(--white);\n    border-radius: 2vmin;\n}\n\n.AuthPage h3 {\n    margin-top: 4vmin;\n    text-align: center;\n    color: var(--text-light);\n    cursor: pointer;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"AuthPage": `RygkJgZmBHTETlLP3C3i`
@@ -2822,4 +2828,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.c38037797316f8f673a0084be1a8850d.js.map
+//# sourceMappingURL=App.9b96f2b8051e489e8764e30a1ef12a82.js.map

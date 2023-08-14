@@ -9,9 +9,16 @@ import NavBar from '../../components/NavBar/NavBar';
 
 export default function App() {
 	const [user, setUser] = useState(getUser());
+	const [showLogin, setShowLogin] = useState(true);
+
 	return (
 		<main className={styles.App}>
-			<NavBar user={user} setUser={setUser} />
+			<NavBar
+				user={user}
+				setUser={setUser}
+				setShowLogin={setShowLogin}
+				showLogin={showLogin}
+			/>
 			{user ? (
 				<>
 					<Routes>
@@ -29,7 +36,7 @@ export default function App() {
 					</Routes>
 				</>
 			) : (
-				<AuthPage setUser={setUser} />
+				<AuthPage setUser={setUser} showLogin={showLogin} />
 			)}
 		</main>
 	);

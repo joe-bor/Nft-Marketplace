@@ -1,18 +1,34 @@
 import styles from './NavBar.module.scss';
 import UserLogOut from '../UserLogOut/UserLogOut';
 
-function NavBar({ user, setUser }) {
+function NavBar({ user, setUser, showLogin, setShowLogin }) {
+	function handleAuthToggle(e) {
+		setShowLogin(!showLogin);
+	}
+
+	const disableButton = showLogin ? true : false;
+
 	return (
 		<div className={styles.NavBar}>
 			<h1 className={styles.title}>NFT MARKETPLACE</h1>
 			<div className={styles.buttonContainer}>
-				<button className={user ? styles.hidden : styles.buttons}>
+				<button
+					className={user ? styles.hidden : styles.buttons}
+					onClick={handleAuthToggle}
+					disabled={!disableButton}
+				>
 					Sign Up
 				</button>
 				{user ? (
 					<UserLogOut user={user} setUser={setUser} />
 				) : (
-					<button className={styles.buttons}>Login</button>
+					<button
+						className={styles.buttons}
+						onClick={handleAuthToggle}
+						disabled={disableButton}
+					>
+						Login
+					</button>
 				)}
 			</div>
 		</div>
