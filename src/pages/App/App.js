@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import styles from './App.module.scss';
 import { getUser } from '../../utilities/users-service';
@@ -10,6 +10,24 @@ import NavBar from '../../components/NavBar/NavBar';
 export default function App() {
 	const [user, setUser] = useState(getUser());
 	const [showLogin, setShowLogin] = useState(true);
+	const [coin, setCoin] = useState('null');
+
+	const url =
+		'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cbinancecoin%2Cronin%2Cdogecoin%2Csolana%2Cmatic-network%2Cshiba-inu%2Cthe-sandbox&vs_currencies=usd';
+	const getCoin = async () => {
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
+			console.log(data);
+			setCoin(data);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+
+	// useEffect(() => {
+	// 	getCoin();
+	// }, []);
 
 	return (
 		<main className={styles.App}>
@@ -36,7 +54,7 @@ export default function App() {
 					</Routes>
 				</>
 			) : (
-				<AuthPage setUser={setUser} showLogin={showLogin} />
+				<AuthPage setUser={setUser} showLogin={showLogin} coin={coin} />
 			)}
 		</main>
 	);

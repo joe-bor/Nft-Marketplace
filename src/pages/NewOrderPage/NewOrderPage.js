@@ -56,7 +56,6 @@ export default function NewOrderPage({ user, setUser }) {
 	}
 
 	return (
-		// <h1>CONSOLE.LOG LOL</h1>
 		<main className={styles.NewOrderPage}>
 			<aside>
 				<Logo />

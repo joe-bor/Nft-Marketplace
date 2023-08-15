@@ -1,5 +1,6 @@
 .NewOrderPage {
-    height: 100%;
+    grid-area: page;
+    height: 95%;
     display: grid;
     grid-template-columns: 1.6fr 3.5fr 3fr;
     grid-template-rows: 1fr;
