@@ -7,8 +7,9 @@ import Logo from '../../components/Logo/Logo';
 import MenuList from '../../components/MenuList/MenuList';
 import CategoryList from '../../components/CategoryList/CategoryList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
+import CoinPriceList from '../../components/CoinPriceList/CoinPriceList';
 
-export default function NewOrderPage({ user, setUser }) {
+export default function NewOrderPage({ user, setUser, coin }) {
 	const [menuItems, setMenuItems] = useState([]);
 	const [activeCat, setActiveCat] = useState('');
 	const [cart, setCart] = useState(null);
@@ -56,27 +57,32 @@ export default function NewOrderPage({ user, setUser }) {
 	}
 
 	return (
-		<main className={styles.NewOrderPage}>
-			<aside>
-				<Logo />
-				<CategoryList
-					categories={categoriesRef.current}
-					cart={setCart}
-					setActiveCat={setActiveCat}
+		<div className={styles.outsideContainer}>
+			{/* <CoinPriceList coin={coin} /> */}
+			<main className={styles.NewOrderPage}>
+				<aside>
+					<Logo />
+					<CategoryList
+						categories={categoriesRef.current}
+						cart={setCart}
+						setActiveCat={setActiveCat}
+					/>
+					<Link to="/orders" className="button btn-sm">
+						PREVIOUS ORDERS
+					</Link>
+				</aside>
+				<MenuList
+					menuItems={menuItems.filter(
+						(item) => item.category.name === activeCat
+					)}
+					handleAddToOrder={handleAddToOrder}
 				/>
-				<Link to="/orders" className="button btn-sm">
-					PREVIOUS ORDERS
-				</Link>
-			</aside>
-			<MenuList
-				menuItems={menuItems.filter((item) => item.category.name === activeCat)}
-				handleAddToOrder={handleAddToOrder}
-			/>
-			<OrderDetail
-				order={cart}
-				handleChangeQty={handleChangeQty}
-				handleCheckout={handleCheckout}
-			/>
-		</main>
+				<OrderDetail
+					order={cart}
+					handleChangeQty={handleChangeQty}
+					handleCheckout={handleCheckout}
+				/>
+			</main>
+		</div>
 	);
 }

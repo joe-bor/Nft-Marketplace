@@ -50,11 +50,14 @@ function CategoryList(_ref) {
 function CoinPrice(_ref) {
   let {
     name,
-    price
+    price,
+    imgPath
   } = _ref;
   return /*#__PURE__*/React.createElement("div", {
     className: _CoinPrice_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].CoinPrice
-  }, /*#__PURE__*/React.createElement("p", null, "Logo"), /*#__PURE__*/React.createElement("p", null, name, " "), /*#__PURE__*/React.createElement("p", null, price, " "));
+  }, /*#__PURE__*/React.createElement("img", {
+    src: imgPath
+  }), /*#__PURE__*/React.createElement("p", null, name), /*#__PURE__*/React.createElement("p", null, price));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CoinPrice);
 
@@ -78,32 +81,29 @@ function CoinPriceList(_ref) {
   let {
     coin
   } = _ref;
-  //! to add images later
-  //! add src={coinImages[coinName]} prop to CoinPrice
-  // const coinImages = {
-  // 	binancecoin: 'binance.jpg',
-  // 	bitcoin: 'bitcoin.jpg',
-  // 	cardano: 'ada.jpg',
-  // 	dogecoin: 'doge.jpg',
-  // 	ethereum: 'eth.jpg',
-  // 	'matic-network': 'matic.jpg',
-  // 	ronin: 'ronin.jpg',
-  // 	'shiba-inu': 'shib.jpg',
-  // 	solana: 'sol.jpg',
-  // 	'the-sandbox': 'sand.jpg'
-  // };
+  // re structure data
+  const newCoins = Object.keys(coin).map(coinName => {
+    const coinInfo = coin[coinName];
+    const price = coinInfo.usd;
+    const img = "./public/img/coin/".concat(coinName, ".svg");
+    return {
+      name: coinName,
+      price: price,
+      img: img // public path
+    };
+  });
 
+  console.log(newCoins);
   return /*#__PURE__*/React.createElement("aside", {
     className: _CoinPriceList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].CoinPriceList
   }, /*#__PURE__*/React.createElement("h1", {
     className: _CoinPriceList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].title
-  }, "Cryptocurrencies"), Object.keys(coin).map(coinName => {
-    return /*#__PURE__*/React.createElement(_CoinPrice_CoinPrice__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      key: coinName,
-      name: coinName,
-      price: coin[coinName].usd
-    });
-  }));
+  }, "Cryptocurrencies"), newCoins.map(coin => /*#__PURE__*/React.createElement(_CoinPrice_CoinPrice__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    key: coin.name,
+    name: coin.name,
+    price: coin.price,
+    imgPath: coin.img
+  })));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CoinPriceList);
 
@@ -711,7 +711,7 @@ function App() {
   const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utilities_users_service__WEBPACK_IMPORTED_MODULE_6__.getUser)());
   const [showLogin, setShowLogin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [coin, setCoin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('null');
-  const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cbinancecoin%2Cronin%2Cdogecoin%2Csolana%2Cmatic-network%2Cshiba-inu%2Cthe-sandbox&vs_currencies=usd';
+  const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cbinancecoin%2Caxie-infinity%2Cdogecoin%2Csolana%2Cmatic-network%2Cshiba-inu%2Cthe-sandbox&vs_currencies=usd';
   const getCoin = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(function* () {
       try {
@@ -743,7 +743,8 @@ function App() {
     path: "/orders/new",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NewOrderPage_NewOrderPage__WEBPACK_IMPORTED_MODULE_3__["default"], {
       user: user,
-      setUser: setUser
+      setUser: setUser,
+      coin: coin
     })
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/orders",
@@ -813,15 +814,16 @@ function AuthPage(_ref) {
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
-/* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
+/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
+/* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
 /* harmony import */ var _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewOrderPage.module.scss */ "./src/pages/NewOrderPage/NewOrderPage.module.scss");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Logo/Logo */ "./src/components/Logo/Logo.js");
 /* harmony import */ var _components_MenuList_MenuList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/MenuList/MenuList */ "./src/components/MenuList/MenuList.js");
 /* harmony import */ var _components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/CategoryList/CategoryList */ "./src/components/CategoryList/CategoryList.js");
 /* harmony import */ var _components_OrderDetail_OrderDetail__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/OrderDetail/OrderDetail */ "./src/components/OrderDetail/OrderDetail.js");
+/* harmony import */ var _components_CoinPriceList_CoinPriceList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/CoinPriceList/CoinPriceList */ "./src/components/CoinPriceList/CoinPriceList.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -834,23 +836,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 function NewOrderPage(_ref) {
   let {
     user,
-    setUser
+    setUser,
+    coin
   } = _ref;
   const [menuItems, setMenuItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [activeCat, setActiveCat] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const categoriesRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]);
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     function getItems() {
       return _getItems.apply(this, arguments);
     }
     function _getItems() {
       _getItems = _asyncToGenerator(function* () {
-        const items = yield _utilities_items_api__WEBPACK_IMPORTED_MODULE_7__.getAll();
+        const items = yield _utilities_items_api__WEBPACK_IMPORTED_MODULE_8__.getAll();
         // iterate over all the items, and grab unique categories -> store them in the array
         categoriesRef.current = items.reduce((cats, item) => {
           const cat = item.category.name;
@@ -869,7 +873,7 @@ function NewOrderPage(_ref) {
     }
     function _getCart() {
       _getCart = _asyncToGenerator(function* () {
-        const cart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.getCart();
+        const cart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.getCart();
         setCart(cart);
       });
       return _getCart.apply(this, arguments);
@@ -886,7 +890,7 @@ function NewOrderPage(_ref) {
   }
   function _handleAddToOrder() {
     _handleAddToOrder = _asyncToGenerator(function* (itemId) {
-      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.addItemToCart(itemId);
+      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.addItemToCart(itemId);
       setCart(updatedCart);
     });
     return _handleAddToOrder.apply(this, arguments);
@@ -896,7 +900,7 @@ function NewOrderPage(_ref) {
   }
   function _handleChangeQty() {
     _handleChangeQty = _asyncToGenerator(function* (itemId, newQty) {
-      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.setItemQtyInCart(itemId, newQty);
+      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.setItemQtyInCart(itemId, newQty);
       setCart(updatedCart);
     });
     return _handleChangeQty.apply(this, arguments);
@@ -906,18 +910,20 @@ function NewOrderPage(_ref) {
   }
   function _handleCheckout() {
     _handleCheckout = _asyncToGenerator(function* () {
-      yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.checkout();
+      yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.checkout();
       navigate('/orders');
     });
     return _handleCheckout.apply(this, arguments);
   }
-  return /*#__PURE__*/React.createElement("main", {
+  return /*#__PURE__*/React.createElement("div", {
+    className: _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].outsideContainer
+  }, /*#__PURE__*/React.createElement("main", {
     className: _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].NewOrderPage
   }, /*#__PURE__*/React.createElement("aside", null, /*#__PURE__*/React.createElement(_components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/React.createElement(_components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_4__["default"], {
     categories: categoriesRef.current,
     cart: setCart,
     setActiveCat: setActiveCat
-  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
+  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
     to: "/orders",
     className: "button btn-sm"
   }, "PREVIOUS ORDERS")), /*#__PURE__*/React.createElement(_components_MenuList_MenuList__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -927,7 +933,7 @@ function NewOrderPage(_ref) {
     order: cart,
     handleChangeQty: handleChangeQty,
     handleCheckout: handleCheckout
-  }));
+  })));
 }
 
 /***/ }),
@@ -1305,7 +1311,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.OX8iNpYseCYBHfahdYWE {
   flex-direction: row;
   flex-wrap: nowrap;
   border: 1px solid black;
-}`, "",{"version":3,"sources":["webpack://./src/components/CoinPrice/CoinPrice.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;EACA,uBAAA;AACJ","sourcesContent":[".CoinPrice {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    border: 1px solid black;\n}"],"sourceRoot":""}]);
+  margin: 1vmin 0;
+  background: #ccc;
+  max-height: 5.38vmin;
+}`, "",{"version":3,"sources":["webpack://./src/components/CoinPrice/CoinPrice.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;EACA,uBAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;AACJ","sourcesContent":[".CoinPrice {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    border: 1px solid black;\n    margin: 1vmin 0;\n    background: #ccc;\n    max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"CoinPrice": `OX8iNpYseCYBHfahdYWE`
@@ -1334,18 +1343,20 @@ ___CSS_LOADER_EXPORT___.locals = {
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.YRPjjGQ2SNCAaJE9yztI {
-  padding: 3vmin;
+  padding: 1.2vmin;
   background-color: var(--tan-1);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
-  width: 45vmin;
-  height: 70vmin;
+  width: 40vmin;
+  height: 80vh;
+  margin: 0;
 }
 
 .IkD0xjvp68XbyGxaGLNa {
   font: small-caps bolder 10vmin;
+  margin-top: -0.5vmin;
   text-align: center;
-}`, "",{"version":3,"sources":["webpack://./src/components/CoinPriceList/CoinPriceList.module.scss"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,aAAA;EACA,cAAA;AACJ;;AAEA;EACI,8BAAA;EACA,kBAAA;AACJ","sourcesContent":[".CoinPriceList {\n    padding: 3vmin;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n    width: 45vmin;\n    height: 70vmin;\n}\n\n.title {\n    font: small-caps bolder 10vmin;\n    text-align: center;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CoinPriceList/CoinPriceList.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,aAAA;EACA,YAAA;EACA,SAAA;AACJ;;AAEA;EACI,8BAAA;EACA,oBAAA;EACA,kBAAA;AACJ","sourcesContent":[".CoinPriceList {\n    padding: 1.2vmin;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n    width: 40vmin;\n    height: 80vh;\n    margin: 0;\n}\n\n.title {\n    font: small-caps bolder 10vmin;\n    margin-top: -.5vmin;\n    text-align: center;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"CoinPriceList": `YRPjjGQ2SNCAaJE9yztI`,
@@ -3116,4 +3127,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.ba295b2861c25c8d7044993c629be8c8.js.map
+//# sourceMappingURL=App.js.map

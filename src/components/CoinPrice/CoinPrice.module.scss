@@ -5,4 +5,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     border: 1px solid black;
+    margin: 1vmin 0;
+    background: #ccc;
+    max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);
 }

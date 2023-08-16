@@ -1,13 +1,15 @@
 .CoinPriceList {
-    padding: 3vmin;
+    padding: 1.2vmin;
     background-color: var(--tan-1);
     border: .1vmin solid var(--tan-3);
     border-radius: 1vmin;
-    width: 45vmin;
-    height: 70vmin;
+    width: 40vmin;
+    height: 80vh;
+    margin: 0;
 }
 
 .title {
     font: small-caps bolder 10vmin;
+    margin-top: -.5vmin;
     text-align: center;
 }

@@ -2,33 +2,31 @@ import styles from './CoinPriceList.module.scss';
 import CoinPrice from '../CoinPrice/CoinPrice';
 
 function CoinPriceList({ coin }) {
-	//! to add images later
-	//! add src={coinImages[coinName]} prop to CoinPrice
-	// const coinImages = {
-	// 	binancecoin: 'binance.jpg',
-	// 	bitcoin: 'bitcoin.jpg',
-	// 	cardano: 'ada.jpg',
-	// 	dogecoin: 'doge.jpg',
-	// 	ethereum: 'eth.jpg',
-	// 	'matic-network': 'matic.jpg',
-	// 	ronin: 'ronin.jpg',
-	// 	'shiba-inu': 'shib.jpg',
-	// 	solana: 'sol.jpg',
-	// 	'the-sandbox': 'sand.jpg'
-	// };
+	// re structure data
+	const newCoins = Object.keys(coin).map((coinName) => {
+		const coinInfo = coin[coinName];
+		const price = coinInfo.usd;
+		const img = `./public/img/coin/${coinName}.svg`;
+
+		return {
+			name: coinName,
+			price: price,
+			img: img // public path
+		};
+	});
+	console.log(newCoins);
 
 	return (
 		<aside className={styles.CoinPriceList}>
 			<h1 className={styles.title}>Cryptocurrencies</h1>
-			{Object.keys(coin).map((coinName) => {
-				return (
-					<CoinPrice
-						key={coinName}
-						name={coinName}
-						price={coin[coinName].usd}
-					/>
-				);
-			})}
+			{newCoins.map((coin) => (
+				<CoinPrice
+					key={coin.name}
+					name={coin.name}
+					price={coin.price}
+					imgPath={coin.img}
+				/>
+			))}
 		</aside>
 	);
 }

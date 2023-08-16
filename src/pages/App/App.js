@@ -13,7 +13,7 @@ export default function App() {
 	const [coin, setCoin] = useState('null');
 
 	const url =
-		'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cbinancecoin%2Cronin%2Cdogecoin%2Csolana%2Cmatic-network%2Cshiba-inu%2Cthe-sandbox&vs_currencies=usd';
+		'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cbinancecoin%2Caxie-infinity%2Cdogecoin%2Csolana%2Cmatic-network%2Cshiba-inu%2Cthe-sandbox&vs_currencies=usd';
 	const getCoin = async () => {
 		try {
 			const response = await fetch(url);
@@ -43,7 +43,9 @@ export default function App() {
 						{/* client-side route that renders the component instance if the path matches the url in the address bar */}
 						<Route
 							path="/orders/new"
-							element={<NewOrderPage user={user} setUser={setUser} />}
+							element={
+								<NewOrderPage user={user} setUser={setUser} coin={coin} />
+							}
 						/>
 						<Route
 							path="/orders"

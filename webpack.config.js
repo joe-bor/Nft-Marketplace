@@ -10,14 +10,17 @@ module.exports = (env) => {
 			App: './src/index.js',
 			main: './src/main.js'
 			/* main: *
-				but this is where you would put code that you need to be compiled in the browser seperate from the react app, like google analytics, google maps, facebook pixel stuff, adsense scripts etc
-				every framework has a mechanism for these things
-			*/
+                but this is where you would put code that you need to be compiled in the browser seperate from the react app, like google analytics, google maps, facebook pixel stuff, adsense scripts etc
+                every framework has a mechanism for these things
+            */
 		},
 		output: {
 			path: path.resolve(__dirname, 'public/js/dist'),
 			filename: '[name].[contenthash].js', // '[name].[contenthash].js' put this if you want to get hashed files to cache bust
-			sourceMapFilename: '[name].[contenthash].js.map',
+			sourceMapFilename:
+				process.env.NODE_ENV === 'dev'
+					? '[name].js.map'
+					: '[name].[contenthash].js.map',
 			publicPath: '/js/dist'
 		},
 		devtool: 'source-map',
