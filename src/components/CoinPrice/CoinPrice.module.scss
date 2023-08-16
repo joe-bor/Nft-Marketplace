@@ -9,3 +9,18 @@
     background: #ccc;
     max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);
 }
+
+.coinLogo {
+    width: 3vmin;
+    height: auto;
+    margin-right: 1vmin;
+    margin-left: 1vmin;
+}
+
+.coinInfo {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1vmin;
+}

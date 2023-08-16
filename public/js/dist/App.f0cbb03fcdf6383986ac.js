@@ -53,11 +53,17 @@ function CoinPrice(_ref) {
     price,
     imgPath
   } = _ref;
+  const imgUrl = "https://assets.coincap.io/assets/icons/".concat(imgPath, "@2x.png");
+  const capitalizedName = imgPath ? imgPath.toUpperCase() : null;
   return /*#__PURE__*/React.createElement("div", {
     className: _CoinPrice_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].CoinPrice
   }, /*#__PURE__*/React.createElement("img", {
-    src: imgPath
-  }), /*#__PURE__*/React.createElement("p", null, name), /*#__PURE__*/React.createElement("p", null, price));
+    src: imgUrl,
+    alt: name,
+    className: _CoinPrice_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].coinLogo
+  }), /*#__PURE__*/React.createElement("div", {
+    className: _CoinPrice_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].coinInfo
+  }, /*#__PURE__*/React.createElement("p", null, capitalizedName ? capitalizedName : name), /*#__PURE__*/React.createElement("p", null, price)));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CoinPrice);
 
@@ -81,18 +87,31 @@ function CoinPriceList(_ref) {
   let {
     coin
   } = _ref;
-  // re structure data
+  const coinImgMapping = {
+    'avalanche-2': 'avax',
+    binancecoin: 'bnb',
+    bitcoin: 'btc',
+    cardano: 'ada',
+    dogecoin: 'doge',
+    ethereum: 'eth',
+    litecoin: 'ltc',
+    ripple: 'xrp',
+    'shiba-inu': 'shib',
+    uniswap: 'uni',
+    vechain: 'vet'
+  };
   const newCoins = Object.keys(coin).map(coinName => {
     const coinInfo = coin[coinName];
     const price = coinInfo.usd;
     const img = "./public/img/coin/".concat(coinName, ".svg");
+    const imgName = coinImgMapping[coinName];
     return {
       name: coinName,
       price: price,
-      img: img // public path
+      img: img,
+      imgName
     };
   });
-
   console.log(newCoins);
   return /*#__PURE__*/React.createElement("aside", {
     className: _CoinPriceList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].CoinPriceList
@@ -102,7 +121,7 @@ function CoinPriceList(_ref) {
     key: coin.name,
     name: coin.name,
     price: coin.price,
-    imgPath: coin.img
+    imgPath: coin.imgName
   })));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CoinPriceList);
@@ -711,7 +730,7 @@ function App() {
   const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utilities_users_service__WEBPACK_IMPORTED_MODULE_6__.getUser)());
   const [showLogin, setShowLogin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [coin, setCoin] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('null');
-  const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cbinancecoin%2Caxie-infinity%2Cdogecoin%2Csolana%2Cmatic-network%2Cshiba-inu%2Cthe-sandbox&vs_currencies=usd';
+  const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Ccardano%2Cdogecoin%2Cshiba-inu%2Cbinancecoin%2Cripple%2Cavalanche-2%2Cuniswap%2Cvechain%2Clitecoin&vs_currencies=usd';
   const getCoin = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(function* () {
       try {
@@ -742,16 +761,11 @@ function App() {
   }), user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/orders/new",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NewOrderPage_NewOrderPage__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      user: user,
-      setUser: setUser,
       coin: coin
     })
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/orders",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_OrderHistoryPage_OrderHistoryPage__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      user: user,
-      setUser: setUser
-    })
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_OrderHistoryPage_OrderHistoryPage__WEBPACK_IMPORTED_MODULE_4__["default"], null)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/*",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Navigate, {
@@ -839,8 +853,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function NewOrderPage(_ref) {
   let {
-    user,
-    setUser,
     coin
   } = _ref;
   const [menuItems, setMenuItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
@@ -1314,10 +1326,27 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.OX8iNpYseCYBHfahdYWE {
   margin: 1vmin 0;
   background: #ccc;
   max-height: 5.38vmin;
-}`, "",{"version":3,"sources":["webpack://./src/components/CoinPrice/CoinPrice.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;EACA,uBAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;AACJ","sourcesContent":[".CoinPrice {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    border: 1px solid black;\n    margin: 1vmin 0;\n    background: #ccc;\n    max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);\n}"],"sourceRoot":""}]);
+}
+
+._1Z2WEFpVvU7TIl5e80u {
+  width: 3vmin;
+  height: auto;
+  margin-right: 1vmin;
+  margin-left: 1vmin;
+}
+
+.UGSsMFiwpVG1WGMqwbVg {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1vmin;
+}`, "",{"version":3,"sources":["webpack://./src/components/CoinPrice/CoinPrice.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;EACA,uBAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;AACJ;;AAEA;EACI,YAAA;EACA,YAAA;EACA,mBAAA;EACA,kBAAA;AACJ;;AAEA;EACI,YAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;AACJ","sourcesContent":[".CoinPrice {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    border: 1px solid black;\n    margin: 1vmin 0;\n    background: #ccc;\n    max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);\n}\n\n.coinLogo {\n    width: 3vmin;\n    height: auto;\n    margin-right: 1vmin;\n    margin-left: 1vmin;\n}\n\n.coinInfo {\n    flex-grow: 1;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding-right: 1vmin;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"CoinPrice": `OX8iNpYseCYBHfahdYWE`
+	"CoinPrice": `OX8iNpYseCYBHfahdYWE`,
+	"coinLogo": `_1Z2WEFpVvU7TIl5e80u`,
+	"coinInfo": `UGSsMFiwpVG1WGMqwbVg`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

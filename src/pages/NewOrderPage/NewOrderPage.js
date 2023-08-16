@@ -9,7 +9,7 @@ import CategoryList from '../../components/CategoryList/CategoryList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import CoinPriceList from '../../components/CoinPriceList/CoinPriceList';
 
-export default function NewOrderPage({ user, setUser, coin }) {
+export default function NewOrderPage({ coin }) {
 	const [menuItems, setMenuItems] = useState([]);
 	const [activeCat, setActiveCat] = useState('');
 	const [cart, setCart] = useState(null);
