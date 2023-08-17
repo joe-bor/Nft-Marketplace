@@ -18,16 +18,16 @@ export default function App() {
 		try {
 			const response = await fetch(url);
 			const data = await response.json();
-			console.log(data);
+			// console.log(data);
 			setCoin(data);
 		} catch (e) {
 			console.error(e);
 		}
 	};
 
-	// useEffect(() => {
-	// 	getCoin();
-	// }, []);
+	useEffect(() => {
+		getCoin();
+	}, []);
 
 	return (
 		<main className={styles.App}>

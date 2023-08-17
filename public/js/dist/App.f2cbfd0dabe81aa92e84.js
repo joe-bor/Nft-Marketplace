@@ -20,13 +20,16 @@ function CategoryList(_ref) {
     activeCat,
     setActiveCat
   } = _ref;
+  console.log("activeCat: ".concat(activeCat));
   const cats = categories.map(cat => /*#__PURE__*/React.createElement("li", {
     key: cat,
     className: cat === activeCat ? _CategoryList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].active : ''
     // FYI, the below will also work, but will give a warning
     // className={cat === activeCat && 'active'}
     ,
-    onClick: () => setActiveCat(cat)
+    onClick: () => {
+      setActiveCat(cat);
+    }
   }, cat));
   return /*#__PURE__*/React.createElement("ul", {
     className: _CategoryList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].CategoryList
@@ -63,7 +66,7 @@ function CoinPrice(_ref) {
     className: _CoinPrice_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].coinLogo
   }), /*#__PURE__*/React.createElement("div", {
     className: _CoinPrice_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].coinInfo
-  }, /*#__PURE__*/React.createElement("p", null, capitalizedName ? capitalizedName : name), /*#__PURE__*/React.createElement("p", null, price)));
+  }, /*#__PURE__*/React.createElement("p", null, capitalizedName ? capitalizedName : 'Loading...'), /*#__PURE__*/React.createElement("p", null, "$ ", price)));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CoinPrice);
 
@@ -112,12 +115,14 @@ function CoinPriceList(_ref) {
       imgName
     };
   });
-  console.log(newCoins);
+  newCoins.sort((a, b) => b.price - a.price);
+  // console.log(newCoins);
+
   return /*#__PURE__*/React.createElement("aside", {
     className: _CoinPriceList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].CoinPriceList
   }, /*#__PURE__*/React.createElement("h1", {
     className: _CoinPriceList_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].title
-  }, "Cryptocurrencies"), newCoins.map(coin => /*#__PURE__*/React.createElement(_CoinPrice_CoinPrice__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "Today's Prices "), newCoins.map(coin => /*#__PURE__*/React.createElement(_CoinPrice_CoinPrice__WEBPACK_IMPORTED_MODULE_1__["default"], {
     key: coin.name,
     name: coin.name,
     price: coin.price,
@@ -655,11 +660,11 @@ function UserLogOut(_ref) {
   function getGreeting() {
     const currentHour = new Date().getHours();
     if (currentHour >= 6 && currentHour < 12) {
-      return 'Good morning';
+      return 'Good morning ☀️';
     } else if (currentHour >= 12 && currentHour < 18) {
-      return 'Good afternoon';
+      return 'Good afternoon ☀️';
     } else {
-      return 'Good evening';
+      return 'Good evening 🌙';
     }
   }
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
@@ -736,7 +741,7 @@ function App() {
       try {
         const response = yield fetch(url);
         const data = yield response.json();
-        console.log(data);
+        // console.log(data);
         setCoin(data);
       } catch (e) {
         console.error(e);
@@ -746,11 +751,9 @@ function App() {
       return _ref.apply(this, arguments);
     };
   }();
-
-  // useEffect(() => {
-  // 	getCoin();
-  // }, []);
-
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    getCoin();
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
     className: _App_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].App
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_NavBar_NavBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -828,20 +831,17 @@ function AuthPage(_ref) {
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
-/* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
+/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
+/* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
 /* harmony import */ var _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewOrderPage.module.scss */ "./src/pages/NewOrderPage/NewOrderPage.module.scss");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Logo/Logo */ "./src/components/Logo/Logo.js");
-/* harmony import */ var _components_MenuList_MenuList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/MenuList/MenuList */ "./src/components/MenuList/MenuList.js");
-/* harmony import */ var _components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/CategoryList/CategoryList */ "./src/components/CategoryList/CategoryList.js");
-/* harmony import */ var _components_OrderDetail_OrderDetail__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/OrderDetail/OrderDetail */ "./src/components/OrderDetail/OrderDetail.js");
-/* harmony import */ var _components_CoinPriceList_CoinPriceList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/CoinPriceList/CoinPriceList */ "./src/components/CoinPriceList/CoinPriceList.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_MenuList_MenuList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/MenuList/MenuList */ "./src/components/MenuList/MenuList.js");
+/* harmony import */ var _components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/CategoryList/CategoryList */ "./src/components/CategoryList/CategoryList.js");
+/* harmony import */ var _components_OrderDetail_OrderDetail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/OrderDetail/OrderDetail */ "./src/components/OrderDetail/OrderDetail.js");
+/* harmony import */ var _components_CoinPriceList_CoinPriceList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/CoinPriceList/CoinPriceList */ "./src/components/CoinPriceList/CoinPriceList.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 
@@ -858,15 +858,15 @@ function NewOrderPage(_ref) {
   const [menuItems, setMenuItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [activeCat, setActiveCat] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const categoriesRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]);
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
+  const categoriesRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]); //! why use ref and not a regular [] ?
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     function getItems() {
       return _getItems.apply(this, arguments);
     }
     function _getItems() {
       _getItems = _asyncToGenerator(function* () {
-        const items = yield _utilities_items_api__WEBPACK_IMPORTED_MODULE_8__.getAll();
+        const items = yield _utilities_items_api__WEBPACK_IMPORTED_MODULE_7__.getAll();
         // iterate over all the items, and grab unique categories -> store them in the array
         categoriesRef.current = items.reduce((cats, item) => {
           const cat = item.category.name;
@@ -885,7 +885,7 @@ function NewOrderPage(_ref) {
     }
     function _getCart() {
       _getCart = _asyncToGenerator(function* () {
-        const cart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.getCart();
+        const cart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.getCart();
         setCart(cart);
       });
       return _getCart.apply(this, arguments);
@@ -902,7 +902,7 @@ function NewOrderPage(_ref) {
   }
   function _handleAddToOrder() {
     _handleAddToOrder = _asyncToGenerator(function* (itemId) {
-      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.addItemToCart(itemId);
+      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.addItemToCart(itemId);
       setCart(updatedCart);
     });
     return _handleAddToOrder.apply(this, arguments);
@@ -912,7 +912,7 @@ function NewOrderPage(_ref) {
   }
   function _handleChangeQty() {
     _handleChangeQty = _asyncToGenerator(function* (itemId, newQty) {
-      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.setItemQtyInCart(itemId, newQty);
+      const updatedCart = yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.setItemQtyInCart(itemId, newQty);
       setCart(updatedCart);
     });
     return _handleChangeQty.apply(this, arguments);
@@ -922,30 +922,29 @@ function NewOrderPage(_ref) {
   }
   function _handleCheckout() {
     _handleCheckout = _asyncToGenerator(function* () {
-      yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.checkout();
+      yield _utilities_orders_api__WEBPACK_IMPORTED_MODULE_8__.checkout();
       navigate('/orders');
     });
     return _handleCheckout.apply(this, arguments);
   }
-  return /*#__PURE__*/React.createElement("div", {
-    className: _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].outsideContainer
-  }, /*#__PURE__*/React.createElement("main", {
+  return /*#__PURE__*/React.createElement("main", {
     className: _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].NewOrderPage
-  }, /*#__PURE__*/React.createElement("aside", null, /*#__PURE__*/React.createElement(_components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/React.createElement(_components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/React.createElement("nav", {
+    className: _NewOrderPage_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].nav
+  }, /*#__PURE__*/React.createElement(_components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_3__["default"], {
     categories: categoriesRef.current,
-    cart: setCart,
+    activeCat: activeCat,
     setActiveCat: setActiveCat
-  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
-    to: "/orders",
-    className: "button btn-sm"
-  }, "PREVIOUS ORDERS")), /*#__PURE__*/React.createElement(_components_MenuList_MenuList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  })), /*#__PURE__*/React.createElement("aside", null, /*#__PURE__*/React.createElement(_components_CoinPriceList_CoinPriceList__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    coin: coin
+  })), /*#__PURE__*/React.createElement(_components_MenuList_MenuList__WEBPACK_IMPORTED_MODULE_2__["default"], {
     menuItems: menuItems.filter(item => item.category.name === activeCat),
     handleAddToOrder: handleAddToOrder
-  }), /*#__PURE__*/React.createElement(_components_OrderDetail_OrderDetail__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_OrderDetail_OrderDetail__WEBPACK_IMPORTED_MODULE_4__["default"], {
     order: cart,
     handleChangeQty: handleChangeQty,
     handleCheckout: handleCheckout
-  })));
+  }));
 }
 
 /***/ }),
@@ -1267,7 +1266,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.l8hJyaPvo9smd6LiNqWK {
   color: var(--text-light);
   list-style: none;
   padding: 0;
-  font-size: 1.7vw;
+  font-size: 3vmin;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: -1vmin;
+  margin-bottom: 0.8vmin;
 }
 
 .l8hJyaPvo9smd6LiNqWK li {
@@ -1275,19 +1279,20 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.l8hJyaPvo9smd6LiNqWK {
   text-align: center;
   border-radius: 0.5vmin;
   margin-bottom: 0.5vmin;
+  transition: transform 0.3s ease;
 }
 
 .l8hJyaPvo9smd6LiNqWK li:hover:not(._scckhAN2KPE1u73kR14) {
   cursor: pointer;
-  background-color: var(--orange);
-  color: var(--white);
+  transform: scale(1.1);
+  color: var(--blue-1);
 }
 
 .l8hJyaPvo9smd6LiNqWK li._scckhAN2KPE1u73kR14 {
-  color: var(--text-dark);
-  background-color: var(--tan-1);
-  border: 0.1vmin solid var(--tan-3);
-}`, "",{"version":3,"sources":["webpack://./src/components/CategoryList/CategoryList.module.scss"],"names":[],"mappings":"AAAA;EACI,wBAAA;EACA,gBAAA;EACA,UAAA;EACA,gBAAA;AACJ;;AAEA;EACI,gBAAA;EACA,kBAAA;EACA,sBAAA;EACA,sBAAA;AACJ;;AAEA;EACI,eAAA;EACA,+BAAA;EACA,mBAAA;AACJ;;AAEA;EACI,uBAAA;EACA,8BAAA;EACA,kCAAA;AACJ","sourcesContent":[".CategoryList {\n    color: var(--text-light);\n    list-style: none;\n    padding: 0;\n    font-size: 1.7vw;\n}\n\n.CategoryList li {\n    padding: .6vmin;\n    text-align: center;\n    border-radius: .5vmin;\n    margin-bottom: .5vmin;\n}\n\n.CategoryList li:hover:not(.active) {\n    cursor: pointer;\n    background-color: var(--orange);\n    color: var(--white);\n}\n\n.CategoryList li.active {\n    color: var(--text-dark);\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n}"],"sourceRoot":""}]);
+  color: var(--green-yellow);
+  font-weight: 700;
+  font-size: 1.05em;
+}`, "",{"version":3,"sources":["webpack://./src/components/CategoryList/CategoryList.module.scss"],"names":[],"mappings":"AAAA;EACI,wBAAA;EACA,gBAAA;EACA,UAAA;EACA,gBAAA;EACA,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,kBAAA;EACA,sBAAA;AACJ;;AAEA;EACI,gBAAA;EACA,kBAAA;EACA,sBAAA;EACA,sBAAA;EACA,+BAAA;AACJ;;AAEA;EACI,eAAA;EACA,qBAAA;EACA,oBAAA;AACJ;;AAEA;EACI,0BAAA;EACA,gBAAA;EACA,iBAAA;AACJ","sourcesContent":[".CategoryList {\n    color: var(--text-light);\n    list-style: none;\n    padding: 0;\n    font-size: 3vmin;\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    margin-top: -1vmin;\n    margin-bottom: .8vmin;\n}\n\n.CategoryList li {\n    padding: .6vmin;\n    text-align: center;\n    border-radius: .5vmin;\n    margin-bottom: .5vmin;\n    transition: transform 0.3s ease;\n}\n\n.CategoryList li:hover:not(.active) {\n    cursor: pointer;\n    transform: scale(1.1);\n    color: var(--blue-1);\n}\n\n.CategoryList li.active {\n    color: var(--green-yellow);\n    font-weight: 700;\n    font-size: 1.05em;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"CategoryList": `l8hJyaPvo9smd6LiNqWK`,
@@ -1322,10 +1327,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.OX8iNpYseCYBHfahdYWE {
   align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
-  border: 1px solid black;
   margin: 1vmin 0;
-  background: #ccc;
   max-height: 5.38vmin;
+  width: 94%;
+  flex: 1;
+  background-color: var(--tan-2);
+  border-radius: 1.5vmin;
 }
 
 ._1Z2WEFpVvU7TIl5e80u {
@@ -1336,12 +1343,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.OX8iNpYseCYBHfahdYWE {
 }
 
 .UGSsMFiwpVG1WGMqwbVg {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 1vmin;
-}`, "",{"version":3,"sources":["webpack://./src/components/CoinPrice/CoinPrice.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;EACA,uBAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;AACJ;;AAEA;EACI,YAAA;EACA,YAAA;EACA,mBAAA;EACA,kBAAA;AACJ;;AAEA;EACI,YAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;AACJ","sourcesContent":[".CoinPrice {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    border: 1px solid black;\n    margin: 1vmin 0;\n    background: #ccc;\n    max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);\n}\n\n.coinLogo {\n    width: 3vmin;\n    height: auto;\n    margin-right: 1vmin;\n    margin-left: 1vmin;\n}\n\n.coinInfo {\n    flex-grow: 1;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding-right: 1vmin;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CoinPrice/CoinPrice.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,6BAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;EACA,eAAA;EACA,oBAAA;EACA,UAAA;EACA,OAAA;EACA,8BAAA;EACA,sBAAA;AACJ;;AAEA;EACI,YAAA;EACA,YAAA;EACA,mBAAA;EACA,kBAAA;AACJ;;AAEA;EACI,OAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;AACJ","sourcesContent":[".CoinPrice {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    margin: 1vmin 0;\n    max-height: calc((70vmin - 10vmin - 2 * 3vmin - 0.2vmin) / 10);\n    width: 94%;\n    flex: 1;\n    background-color: var(--tan-2);\n    border-radius: 1.5vmin;\n}\n\n.coinLogo {\n    width: 3vmin;\n    height: auto;\n    margin-right: 1vmin;\n    margin-left: 1vmin;\n}\n\n.coinInfo {\n    flex: 1;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding-right: 1vmin;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"CoinPrice": `OX8iNpYseCYBHfahdYWE`,
@@ -1375,17 +1382,23 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.YRPjjGQ2SNCAaJE9yztI {
   padding: 1.2vmin;
   background-color: var(--tan-1);
   border: 0.1vmin solid var(--tan-3);
-  border-radius: 1vmin;
+  border-radius: 2vmin;
   width: 40vmin;
   height: 80vh;
   margin: 0;
+  margin-top: -1vmin;
+  overflow: scroll;
+  display: flex;
 }
 
 .IkD0xjvp68XbyGxaGLNa {
-  font: small-caps bolder 10vmin;
-  margin-top: -0.5vmin;
+  font-size: 4vmin;
+  font-weight: 500;
+  font-variant: small-caps;
+  margin-top: -0.4vmin;
+  margin-bottom: -0.4vmin;
   text-align: center;
-}`, "",{"version":3,"sources":["webpack://./src/components/CoinPriceList/CoinPriceList.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,aAAA;EACA,YAAA;EACA,SAAA;AACJ;;AAEA;EACI,8BAAA;EACA,oBAAA;EACA,kBAAA;AACJ","sourcesContent":[".CoinPriceList {\n    padding: 1.2vmin;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n    width: 40vmin;\n    height: 80vh;\n    margin: 0;\n}\n\n.title {\n    font: small-caps bolder 10vmin;\n    margin-top: -.5vmin;\n    text-align: center;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CoinPriceList/CoinPriceList.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,aAAA;EACA,YAAA;EACA,SAAA;EACA,kBAAA;EACA,gBAAA;EACA,aAAA;AACJ;;AAEA;EACI,gBAAA;EACA,gBAAA;EACA,wBAAA;EACA,oBAAA;EACA,uBAAA;EACA,kBAAA;AACJ","sourcesContent":[".CoinPriceList {\n    padding: 1.2vmin;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 2vmin;\n    width: 40vmin;\n    height: 80vh;\n    margin: 0;\n    margin-top: -1vmin;\n    overflow: scroll;\n    display: flex;\n}\n\n.title {\n    font-size: 4vmin;\n    font-weight: 500;\n    font-variant: small-caps;\n    margin-top: -0.4vmin;\n    margin-bottom: -0.4vmin;\n    text-align: center;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"CoinPriceList": `YRPjjGQ2SNCAaJE9yztI`,
@@ -1548,7 +1561,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.eBz5FvD9TgyIgfFi1MdG {
   margin: 3vmin 0;
   padding: 3vmin;
   overflow-y: scroll;
-}`, "",{"version":3,"sources":["webpack://./src/components/MenuList/MenuList.module.scss"],"names":[],"mappings":"AAAA;EACI,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,eAAA;EACA,cAAA;EACA,kBAAA;AACJ","sourcesContent":[".MenuList {\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 2vmin;\n    margin: 3vmin 0;\n    padding: 3vmin;\n    overflow-y: scroll;\n}"],"sourceRoot":""}]);
+  height: 80vh;
+}`, "",{"version":3,"sources":["webpack://./src/components/MenuList/MenuList.module.scss"],"names":[],"mappings":"AAAA;EACI,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,eAAA;EACA,cAAA;EACA,kBAAA;EACA,YAAA;AACJ","sourcesContent":[".MenuList {\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 2vmin;\n    margin: 3vmin 0;\n    padding: 3vmin;\n    overflow-y: scroll;\n    height: 80vh;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"MenuList": `eBz5FvD9TgyIgfFi1MdG`
@@ -1577,7 +1591,7 @@ ___CSS_LOADER_EXPORT___.locals = {
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
-  width: 100%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1614,7 +1628,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
   font-size: 2vw;
   text-align: center;
   color: var(--text-light);
-}`, "",{"version":3,"sources":["webpack://./src/components/MenuListItem/MenuListItem.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;EACA,cAAA;EACA,wBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,gBAAA;AACJ;;AAEA;EACI,WAAA;EACA,UAAA;EACA,cAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;AACJ;;AAEA;EACI,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEA;EACI,cAAA;EACA,kBAAA;EACA,wBAAA;AACJ","sourcesContent":[".MenuListItem {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 3vmin;\n    padding: 2vmin;\n    color: var(--text-light);\n    background-color: var(--white);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n    font-size: 4vmin;\n}\n\n.MenuListItem .emoji {\n    height: 8vw;\n    width: 8vw;\n    font-size: 4vw;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n}\n\n.MenuListItem .buy {\n    display: flex;\n    flex-direction: column;\n}\n\n.MenuListItem .buy span {\n    font-size: 1.7vw;\n    text-align: center;\n    color: var(--text-light);\n}\n\n.MenuListItem .name {\n    font-size: 2vw;\n    text-align: center;\n    color: var(--text-light);\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/MenuListItem/MenuListItem.module.scss"],"names":[],"mappings":"AAAA;EACI,UAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;EACA,cAAA;EACA,wBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,gBAAA;AACJ;;AAEA;EACI,WAAA;EACA,UAAA;EACA,cAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;AACJ;;AAEA;EACI,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEA;EACI,cAAA;EACA,kBAAA;EACA,wBAAA;AACJ","sourcesContent":[".MenuListItem {\n    width: 95%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 3vmin;\n    padding: 2vmin;\n    color: var(--text-light);\n    background-color: var(--white);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n    font-size: 4vmin;\n}\n\n.MenuListItem .emoji {\n    height: 8vw;\n    width: 8vw;\n    font-size: 4vw;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n}\n\n.MenuListItem .buy {\n    display: flex;\n    flex-direction: column;\n}\n\n.MenuListItem .buy span {\n    font-size: 1.7vw;\n    text-align: center;\n    color: var(--text-light);\n}\n\n.MenuListItem .name {\n    font-size: 2vw;\n    text-align: center;\n    color: var(--text-light);\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"MenuListItem": `X4tFBfG4MKknHvd01CKE`,
@@ -1649,10 +1663,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.QpVD3qAS0nYBtoQqAYoe {
   grid-area: nav;
   display: flex;
   flex-direction: row;
-  background-color: rgb(225, 109, 26);
+  background-color: var(--blue-green);
   height: 4rem;
-  border-radius: 1vmin;
+  border-top-left-radius: 1vmin;
+  border-top-right-radius: 1vmin;
   margin-top: -1vmin;
+  border: 0.1vmin solid var(--blue-1);
 }
 
 .yO6peHgUWkLrjEeOxzNq {
@@ -1680,15 +1696,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.QpVD3qAS0nYBtoQqAYoe {
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-.DEGMaUCVDuo5Jqd0H18t:hover {
-  background-color: var(--tan-4);
-  color: var(--text-dark);
+.DEGMaUCVDuo5Jqd0H18t:not(:disabled):hover {
+  color: var(--white);
+  background-color: var(--yellow-1);
   transform: scale(1.05);
 }
 
 .pGuXSjiAF9ReSU4SwCSk {
   visibility: hidden;
-}`, "",{"version":3,"sources":["webpack://./src/components/NavBar/NavBar.module.scss"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,aAAA;EACA,mBAAA;EACA,mCAAA;EACA,YAAA;EACA,oBAAA;EACA,kBAAA;AACJ;;AAEA;EACI,gBAAA;EACA,mBAAA;AACJ;;AAEA;EACI,aAAA;EACA,mBAAA;EACA,iBAAA;AACJ;;AAEA;EACI,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,aAAA;EACA,iBAAA;EACA,8BAAA;EACA,wBAAA;EACA,YAAA;EACA,qBAAA;EACA,eAAA;EACA,4EAAA;AACJ;;AAEA;EACI,8BAAA;EACA,uBAAA;EACA,sBAAA;AACJ;;AAEA;EACI,kBAAA;AACJ","sourcesContent":[".NavBar {\n    grid-area: nav;\n    display: flex;\n    flex-direction: row;\n    background-color: rgb(225, 109, 26);\n    height: 4rem;\n    border-radius: 1vmin;\n    margin-top: -1vmin;\n}\n\n.title {\n    font-size:  5vmin;\n    margin: 1vmin 1vmin;\n}\n\n.buttonContainer {\n    display: flex;\n    align-items: center;\n    margin-left: auto;\n}\n\n.buttons {\n    font-size: 1.5vmin;\n    text-align: center;\n    margin-left: auto;\n    height: 3vmin;\n    padding: 0 1.5rem;\n    background-color: var(--tan-1);\n    color: var(--text-light);\n    border: none;\n    border-radius: 0.5rem;\n    cursor: pointer;\n    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;\n}\n\n.buttons:hover {\n    background-color: var(--tan-4);\n    color: var(--text-dark);\n    transform: scale(1.05);\n}\n\n.hidden {\n    visibility: hidden;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/NavBar/NavBar.module.scss"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,aAAA;EACA,mBAAA;EACA,mCAAA;EACA,YAAA;EACA,6BAAA;EACA,8BAAA;EACA,kBAAA;EACA,mCAAA;AACJ;;AAEA;EACI,gBAAA;EACA,mBAAA;AACJ;;AAEA;EACI,aAAA;EACA,mBAAA;EACA,iBAAA;AACJ;;AAEA;EACI,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,aAAA;EACA,iBAAA;EACA,8BAAA;EACA,wBAAA;EACA,YAAA;EACA,qBAAA;EACA,eAAA;EACA,4EAAA;AACJ;;AAEA;EACI,mBAAA;EACA,iCAAA;EACA,sBAAA;AACJ;;AAEA;EACI,kBAAA;AACJ","sourcesContent":[".NavBar {\n    grid-area: nav;\n    display: flex;\n    flex-direction: row;\n    background-color: var(--blue-green);\n    height: 4rem;\n    border-top-left-radius: 1vmin;\n    border-top-right-radius: 1vmin;\n    margin-top: -1vmin;\n    border: .1vmin solid var(--blue-1);\n}\n\n.title {\n    font-size:  5vmin;\n    margin: 1vmin 1vmin;\n}\n\n.buttonContainer {\n    display: flex;\n    align-items: center;\n    margin-left: auto;\n}\n\n.buttons {\n    font-size: 1.5vmin;\n    text-align: center;\n    margin-left: auto;\n    height: 3vmin;\n    padding: 0 1.5rem;\n    background-color: var(--tan-1);\n    color: var(--text-light);\n    border: none;\n    border-radius: 0.5rem;\n    cursor: pointer;\n    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;\n}\n\n.buttons:not(:disabled):hover {\n    color: var(--white);\n    background-color: var(--yellow-1);\n    transform: scale(1.05);\n}\n\n.hidden {\n    visibility: hidden;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"NavBar": `QpVD3qAS0nYBtoQqAYoe`,
@@ -2021,7 +2037,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.RZqTJBeYN7RXwcHgPFys {
   height: 95%;
   display: grid;
   grid-template-columns: 1.6fr 3.5fr 3fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 3% 1fr;
   background-color: var(--white);
   border-radius: 2vmin;
 }
@@ -2031,8 +2047,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.RZqTJBeYN7RXwcHgPFys {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 3vmin 2vmin;
-}`, "",{"version":3,"sources":["webpack://./src/pages/NewOrderPage/NewOrderPage.module.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;EACA,WAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AACJ","sourcesContent":[".NewOrderPage {\n    grid-area: page;\n    height: 95%;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n}\n\n.NewOrderPage aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n}"],"sourceRoot":""}]);
+  margin: 1.5vmin 2vmin;
+}
+
+.RZqTJBeYN7RXwcHgPFys nav {
+  grid-column: 1/span 3;
+  grid-row: 1;
+  background-color: var(--tan-3);
+  border-bottom-left-radius: 1vmin;
+  border-bottom-right-radius: 1vmin;
+  margin: 0;
+}`, "",{"version":3,"sources":["webpack://./src/pages/NewOrderPage/NewOrderPage.module.scss"],"names":[],"mappings":"AAAA;EACI,eAAA;EACA,WAAA;EACA,aAAA;EACA,sCAAA;EACA,0BAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEA;EACI,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,qBAAA;AACJ;;AAEA;EACI,qBAAA;EACA,WAAA;EACA,8BAAA;EACA,gCAAA;EACA,iCAAA;EACA,SAAA;AACJ","sourcesContent":[".NewOrderPage {\n    grid-area: page;\n    height: 95%;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 3% 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n}\n\n.NewOrderPage aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 1.5vmin 2vmin;\n}\n\n.NewOrderPage nav {\n    grid-column: 1 / span 3;\n    grid-row: 1;\n    background-color: var(--tan-3);\n    border-bottom-left-radius: 1vmin;\n    border-bottom-right-radius: 1vmin;\n    margin: 0;\n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"NewOrderPage": `RZqTJBeYN7RXwcHgPFys`

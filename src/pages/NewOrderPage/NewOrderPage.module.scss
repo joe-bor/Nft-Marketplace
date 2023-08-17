@@ -3,7 +3,7 @@
     height: 95%;
     display: grid;
     grid-template-columns: 1.6fr 3.5fr 3fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 3% 1fr;
     background-color: var(--white);
     border-radius: 2vmin;
 }
@@ -13,5 +13,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: 3vmin 2vmin;
+    margin: 1.5vmin 2vmin;
+}
+
+.NewOrderPage nav {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    background-color: var(--tan-3);
+    border-bottom-left-radius: 1vmin;
+    border-bottom-right-radius: 1vmin;
+    margin: 0;
 }

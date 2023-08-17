@@ -1,6 +1,5 @@
 {
   "presets": [
-
     ["@babel/env",
       {
         "targets": {
@@ -15,12 +14,20 @@
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", {
-      "legacy": true
+      "legacy": true,
+      "loose": true
     }],
     ["@babel/plugin-proposal-class-properties", {
+      "legacy": true,
       "loose": false
     }],
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-transform-async-to-generator"
+    ["@babel/plugin-syntax-dynamic-import", {
+      "legacy": true,
+      "loose": true
+    }],
+    ["@babel/plugin-transform-async-to-generator", {
+      "legacy": true,
+      "loose": true
+    }]
   ]
 }

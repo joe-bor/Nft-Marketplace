@@ -7,6 +7,10 @@
     --orange: #F67F00;
     --text-light: #968c84;
     --text-dark: #615954;
+    --blue-1: #3498db;
+    --blue-green: #218c9d;
+    --green-yellow: #5a9c21;
+    --yellow-1: #f39c12;
 }
 
 *,
@@ -124,7 +128,7 @@ a.button {
     margin: 1vmin;
     padding: 1vmin;
     color: var(--white);
-    background-color: var(--orange);
+    background-color: var(--yellow-1);
     font-size: 2vmin;
     font-weight: bold;
     text-decoration: none;
@@ -154,4 +158,10 @@ form:invalid button[type="submit"] {
 button[type="submit"] {
     grid-column: span 2;
     margin: 1vmin 0 0;
+}
+
+button:not(:disabled):hover {
+    color: var(--yellow-1);
+    background-color: var(--white);
+    transform: scale(1.05);
 }

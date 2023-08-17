@@ -7,8 +7,8 @@ function CoinPrice({ name, price, imgPath }) {
 		<div className={styles.CoinPrice}>
 			<img src={imgUrl} alt={name} className={styles.coinLogo}></img>
 			<div className={styles.coinInfo}>
-				<p>{capitalizedName ? capitalizedName : name}</p>
-				<p>{price}</p>
+				<p>{capitalizedName ? capitalizedName : 'Loading...'}</p>
+				<p>$ {price}</p>
 			</div>
 		</div>
 	);

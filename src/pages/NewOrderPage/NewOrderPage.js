@@ -3,7 +3,6 @@ import * as itemsAPI from '../../utilities/items-api';
 import * as ordersAPI from '../../utilities/orders-api';
 import styles from './NewOrderPage.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../components/Logo/Logo';
 import MenuList from '../../components/MenuList/MenuList';
 import CategoryList from '../../components/CategoryList/CategoryList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
@@ -13,7 +12,7 @@ export default function NewOrderPage({ coin }) {
 	const [menuItems, setMenuItems] = useState([]);
 	const [activeCat, setActiveCat] = useState('');
 	const [cart, setCart] = useState(null);
-	const categoriesRef = useRef([]);
+	const categoriesRef = useRef([]); //! why use ref and not a regular [] ?
 	const navigate = useNavigate();
 
 	useEffect(function () {
@@ -57,32 +56,29 @@ export default function NewOrderPage({ coin }) {
 	}
 
 	return (
-		<div className={styles.outsideContainer}>
-			{/* <CoinPriceList coin={coin} /> */}
-			<main className={styles.NewOrderPage}>
-				<aside>
-					<Logo />
-					<CategoryList
-						categories={categoriesRef.current}
-						cart={setCart}
-						setActiveCat={setActiveCat}
-					/>
-					<Link to="/orders" className="button btn-sm">
-						PREVIOUS ORDERS
-					</Link>
-				</aside>
-				<MenuList
-					menuItems={menuItems.filter(
-						(item) => item.category.name === activeCat
-					)}
-					handleAddToOrder={handleAddToOrder}
+		<main className={styles.NewOrderPage}>
+			<nav className={styles.nav}>
+				<CategoryList
+					categories={categoriesRef.current}
+					activeCat={activeCat}
+					setActiveCat={setActiveCat}
 				/>
-				<OrderDetail
-					order={cart}
-					handleChangeQty={handleChangeQty}
-					handleCheckout={handleCheckout}
-				/>
-			</main>
-		</div>
+			</nav>
+			<aside>
+				<CoinPriceList coin={coin} />
+				{/* <Link to="/orders" className="button btn-sm">
+					PREVIOUS ORDERS
+				</Link> */}
+			</aside>
+			<MenuList
+				menuItems={menuItems.filter((item) => item.category.name === activeCat)}
+				handleAddToOrder={handleAddToOrder}
+			/>
+			<OrderDetail
+				order={cart}
+				handleChangeQty={handleChangeQty}
+				handleCheckout={handleCheckout}
+			/>
+		</main>
 	);
 }

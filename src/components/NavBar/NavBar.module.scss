@@ -2,10 +2,12 @@
     grid-area: nav;
     display: flex;
     flex-direction: row;
-    background-color: rgb(225, 109, 26);
+    background-color: var(--blue-green);
     height: 4rem;
-    border-radius: 1vmin;
+    border-top-left-radius: 1vmin;
+    border-top-right-radius: 1vmin;
     margin-top: -1vmin;
+    border: .1vmin solid var(--blue-1);
 }
 
 .title {
@@ -33,9 +35,9 @@
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-.buttons:hover {
-    background-color: var(--tan-4);
-    color: var(--text-dark);
+.buttons:not(:disabled):hover {
+    color: var(--white);
+    background-color: var(--yellow-1);
     transform: scale(1.05);
 }
 

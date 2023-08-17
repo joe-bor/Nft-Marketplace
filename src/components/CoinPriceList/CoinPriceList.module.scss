@@ -2,14 +2,20 @@
     padding: 1.2vmin;
     background-color: var(--tan-1);
     border: .1vmin solid var(--tan-3);
-    border-radius: 1vmin;
+    border-radius: 2vmin;
     width: 40vmin;
     height: 80vh;
     margin: 0;
+    margin-top: -1vmin;
+    overflow: scroll;
+    display: flex;
 }
 
 .title {
-    font: small-caps bolder 10vmin;
-    margin-top: -.5vmin;
+    font-size: 4vmin;
+    font-weight: 500;
+    font-variant: small-caps;
+    margin-top: -0.4vmin;
+    margin-bottom: -0.4vmin;
     text-align: center;
 }

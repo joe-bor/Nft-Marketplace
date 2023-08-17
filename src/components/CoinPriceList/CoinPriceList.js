@@ -29,11 +29,12 @@ function CoinPriceList({ coin }) {
 			imgName
 		};
 	});
-	console.log(newCoins);
+	newCoins.sort((a, b) => b.price - a.price);
+	// console.log(newCoins);
 
 	return (
 		<aside className={styles.CoinPriceList}>
-			<h1 className={styles.title}>Cryptocurrencies</h1>
+			<h1 className={styles.title}>Today's Prices </h1>
 			{newCoins.map((coin) => (
 				<CoinPrice
 					key={coin.name}
