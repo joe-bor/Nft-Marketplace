@@ -10,13 +10,14 @@
     border: .1vmin solid var(--tan-3);
     border-radius: 1vmin;
     font-size: 4vmin;
+    transition: transform 0.4s, box-shadow 0.4s;
 }
 
 .MenuListItem .emoji {
     height: 8vw;
     width: 8vw;
     font-size: 4vw;
-    background-color: var(--tan-1);
+    background-color: var(--tan-2);
     border: .1vmin solid var(--tan-3);
     border-radius: 1vmin;
 }
@@ -36,4 +37,9 @@
     font-size: 2vw;
     text-align: center;
     color: var(--text-light);
+}
+
+.MenuListItem:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 128, 0.5);
 }

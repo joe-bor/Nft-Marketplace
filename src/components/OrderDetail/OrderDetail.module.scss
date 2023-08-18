@@ -53,3 +53,30 @@
     top: 50vh;
     font-size: 2vmin;
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prevBtn {
+    color: var(--white);
+    background-color: var(--yellow-1);
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    border: .1vmin solid var(--tan-2);
+    border-radius: .5vmin;
+    outline: none;
+    cursor: pointer;
+    padding: .4vmin .5vmin;
+    transition: transform 0.3 ease;
+}
+
+.prevBtn:hover {
+    color: var(--yellow-1);
+    background-color: var(--white);
+    cursor: pointer;
+    transform: scale(1.04);
+
+}

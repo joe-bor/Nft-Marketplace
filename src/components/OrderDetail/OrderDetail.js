@@ -1,5 +1,6 @@
 import styles from './OrderDetail.module.scss';
 import LineItem from '../LineItem/LineItem';
+import { Link } from 'react-router-dom';
 
 // Used to display the details of any order, including the cart (unpaid order)
 export default function OrderDetail({
@@ -26,9 +27,15 @@ export default function OrderDetail({
 						ORDER <span className="smaller">{order.orderId}</span>
 					</span>
 				) : (
-					<span>NEW ORDER</span>
-				)}
-				<span>{new Date(order.updatedAt).toLocaleDateString()}</span>
+					<div className={styles.container}>
+							<span>CART: </span>
+							<Link to="/orders" className={styles.prevBtn}>
+								PREVIOUS ORDERS
+							</Link>
+							<span>{new Date(order.updatedAt).toLocaleDateString()}</span>
+						</div>
+
+					)}
 			</div>
 			<div
 				className={`${styles.lineItemContainer} flex-ctr-ctr flex-col scroll-y`}
@@ -55,7 +62,7 @@ export default function OrderDetail({
 						</section>
 					</>
 				) : (
-					<div className={styles.hungry}>Hungry?</div>
+					<div className={styles.hungry}>Not sure where to spend your money?</div>
 				)}
 			</div>
 		</div>

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as itemsAPI from '../../utilities/items-api';
 import * as ordersAPI from '../../utilities/orders-api';
 import styles from './NewOrderPage.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MenuList from '../../components/MenuList/MenuList';
 import CategoryList from '../../components/CategoryList/CategoryList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
@@ -73,9 +73,6 @@ export default function NewOrderPage({ coin }) {
 			</nav>
 			<aside>
 				<CoinPriceList coin={coin} />
-				{/* <Link to="/orders" className="button btn-sm">
-					PREVIOUS ORDERS
-				</Link> */}
 			</aside>
 			<MenuList
 				menuItems={menuItems.filter((item) => item.category.name === activeCat)}

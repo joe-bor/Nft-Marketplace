@@ -5,11 +5,15 @@
     align-items: center;
     background-color: var(--white);
     border-radius: 2vmin;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: var(--bg);
 }
 
-.AuthPage h3 {
-    margin-top: 4vmin;
-    text-align: center;
-    color: var(--text-light);
-    cursor: pointer;
+.AuthPage aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5vmin 2vmin;
 }
