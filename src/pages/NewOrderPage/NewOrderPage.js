@@ -26,7 +26,14 @@ export default function NewOrderPage({ coin }) {
 			setMenuItems(items);
 			// we use the first category in the array returned by .reduce above
 			// set it to activeCat state
-			setActiveCat(categoriesRef.current[0]);
+
+			function randomCategoryGen(max) {
+				return Math.floor(Math.random() * max);
+			}
+
+			setActiveCat(
+				categoriesRef.current[randomCategoryGen(categoriesRef.current.length)]
+			);
 		}
 		getItems();
 		async function getCart() {

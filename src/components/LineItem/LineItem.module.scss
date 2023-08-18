@@ -30,3 +30,15 @@
 .LineItem button {
     margin: 0;
 }
+
+.LineItem .logo {
+    height: 4vw;
+    width: 4vw;
+
+}
+
+sub {
+    font-size: small;
+    color: var(--text-light);
+    font-style: italic;
+}

@@ -2,7 +2,8 @@
     grid-area: nav;
     display: flex;
     flex-direction: row;
-    background-color: var(--blue-green);
+    background: rgb(54, 117, 139);
+    background: linear-gradient(95deg, rgba(54, 117, 139, 1) 13%, rgba(33, 140, 157, 1) 58%, rgba(90, 156, 33, 1) 97%);
     height: 4rem;
     border-top-left-radius: 1vmin;
     border-top-right-radius: 1vmin;

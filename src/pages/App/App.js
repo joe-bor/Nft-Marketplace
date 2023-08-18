@@ -25,9 +25,9 @@ export default function App() {
 		}
 	};
 
-	useEffect(() => {
-		getCoin();
-	}, []);
+	// useEffect(() => {
+	// 	getCoin();
+	// }, []);
 
 	return (
 		<main className={styles.App}>
