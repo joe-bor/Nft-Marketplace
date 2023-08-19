@@ -10,7 +10,7 @@ function NavBar({ user, setUser, showLogin, setShowLogin }) {
 
 	return (
 		<div className={styles.NavBar}>
-			<h1 className={styles.title}>Nft Marketplace</h1>
+			<h1 className={styles.title}>Nft Mark<span className='pop'>eth</span>place</h1>
 			<div className={styles.buttonContainer}>
 				<button
 					className={user ? styles.hidden : styles.buttons}

@@ -29,7 +29,7 @@
 .OrderDetail .total {
     width: 100%;
     display: grid;
-    grid-template-columns: 18.35vw 5.75vw 5.25vw;
+    grid-template-columns: 18.35vw 5.75vw 1fr;
     padding: 1vmin 0;
     color: var(--text-light);
     border-top: .1vmin solid var(--tan-3);
@@ -45,9 +45,13 @@
 
 .OrderDetail .total span.right {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
+.OrderDetail .total span.end {
+    display: flex;
+    justify-content: flex-end;
+}
 .OrderDetail .hungry {
     position: absolute;
     top: 50vh;

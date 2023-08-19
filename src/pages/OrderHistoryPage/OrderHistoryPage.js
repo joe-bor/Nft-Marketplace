@@ -32,10 +32,11 @@ export default function OrderHistoryPage({ user, setUser }) {
 	return (
 		<main className={styles.OrderHistoryPage}>
 			<aside className={styles.aside}>
-				<Logo />
 				<Link to="/orders/new" className="button btn-sm">
-					NEW ORDER
+					CREATE NEW ORDER
 				</Link>
+				<Logo imgPath={'https://i.imgur.com/ZdWnMsJ.png'}/>
+				<Logo  imgPath={'https://i.imgur.com/fSBjNCM.png'}/>
 			</aside>
 			<OrderList
 				orders={orders}

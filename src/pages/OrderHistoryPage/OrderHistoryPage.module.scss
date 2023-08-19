@@ -2,16 +2,16 @@
     grid-area: page;
     height: 95%;
     display: grid;
-    grid-template-columns: 1.6fr 3.5fr 3fr;
+    grid-template-columns: 1.6fr 3fr 3.2fr;
     grid-template-rows: 1fr;
-    background-color: var(--white);
+    background-color: var(--bg);
     border-radius: 2vmin;
 }
 
 .OrderHistoryPage .aside {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    margin: 3vmin 2vmin;
+    margin: 1.5vmin 2vmin;
 }

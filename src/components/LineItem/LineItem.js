@@ -5,9 +5,9 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
 		<div className={styles.LineItem}>
 			<img className={styles.logo} src={lineItem.item.imgPath} />
 			<div className="flex-ctr-ctr flex-col">
-				<span className="align-ctr">{lineItem.item.name}</span>
-				<span>
-					$ {lineItem.item.price.toFixed(2)} <sub>/ea</sub>
+				<span className="align-ctr heavierText">{lineItem.item.name}</span>
+				<span className='smaller'>
+					{lineItem.item.price.toFixed(2)} ETH <sub>/ea</sub>
 				</span>
 			</div>
 			<div
@@ -32,7 +32,7 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
 					</button>
 				)}
 			</div>
-			<div className={styles.extPrice}>${lineItem.extPrice.toFixed(2)}</div>
+			<div className={styles.extPrice}>{lineItem.extPrice.toFixed(2)} ETH</div>
 		</div>
 	);
 }

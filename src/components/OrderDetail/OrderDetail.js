@@ -45,19 +45,18 @@ export default function OrderDetail({
 						{lineItems}
 						<section className={styles.total}>
 							{order.isPaid ? (
-								<span className={styles.right}>TOTAL&nbsp;&nbsp;</span>
+								<span className={styles.end}>TOTAL</span>
 							) : (
-								<button
-									className="btn-sm"
-									onClick={handleCheckout}
-									disabled={!lineItems.length}
-								>
-									CHECKOUT
-								</button>
+									<button
+										onClick={handleCheckout}
+										disabled={!lineItems.length}
+									>
+										CHECKOUT
+									</button>
 							)}
 							<span>{order.totalQty}</span>
 							<span className={styles.right}>
-								${order.orderTotal.toFixed(2)}
+								{order.orderTotal.toFixed(2)} ETH
 							</span>
 						</section>
 					</>

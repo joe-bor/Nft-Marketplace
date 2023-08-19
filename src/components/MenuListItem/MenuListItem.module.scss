@@ -9,7 +9,7 @@
     background-color: var(--white);
     border: .1vmin solid var(--tan-3);
     border-radius: 1vmin;
-    font-size: 4vmin;
+    font-size: 3vmin;
     transition: transform 0.4s, box-shadow 0.4s;
 }
 
@@ -37,6 +37,7 @@
     font-size: 2vw;
     text-align: center;
     color: var(--text-light);
+    font-weight: 600;
 }
 
 .MenuListItem:hover {

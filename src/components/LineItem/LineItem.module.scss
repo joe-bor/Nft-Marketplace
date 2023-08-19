@@ -1,12 +1,13 @@
 .LineItem {
     width: 100%;
     display: grid;
-    grid-template-columns: 3vw 15.35vw 5.75vw 5.25vw;
+    grid-template-columns: 3vw 17vw 5vw 5vw;
     padding: 1vmin 0;
     color: var(--text-light);
-    background-color: var(--white);
+    background-color: var(--tan-1);
     border-top: .1vmin solid var(--tan-3);
     font-size: 1.5vw;
+    margin-right: -1vmin;
 }
 
 .LineItem:last-child {
@@ -23,8 +24,10 @@
 .LineItem .extPrice {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    font-size: 1.3vw;
+    align-content: flex-end;
+    font-size: 1.2vw;
+    margin-left: 3vmin;
+    margin-right: -2vmin;
 }
 
 .LineItem button {
@@ -34,7 +37,8 @@
 .LineItem .logo {
     height: 4vw;
     width: 4vw;
-
+    background-color: var(--tan-2);
+    border-radius: 2vmin;
 }
 
 sub {

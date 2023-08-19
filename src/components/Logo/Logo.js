@@ -1,10 +1,9 @@
 import styles from './Logo.module.scss';
 
-export default function Logo() {
+export default function Logo({ imgPath }) {
 	return (
 		<div className={styles.Logo}>
-			<div>SEI</div>
-			<div>CAFE</div>
+			<img src={imgPath}/>
 		</div>
 	);
 }

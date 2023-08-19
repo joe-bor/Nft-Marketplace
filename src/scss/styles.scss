@@ -166,3 +166,15 @@ button:not(:disabled):hover {
     background-color: var(--white);
     transform: scale(1.05);
 }
+
+.heavierText {
+    font-weight: 600;
+}
+
+.pop {
+    background: rgb(198,197,212);
+    background: linear-gradient(95deg, rgba(198,197,212,1) 12%, rgba(113,107,148,1) 40%, rgba(55,54,125,1) 74%, rgba(20,4,77,1) 93%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

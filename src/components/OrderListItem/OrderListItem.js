@@ -19,7 +19,7 @@ export default function OrderListItem({
 				</div>
 			</div>
 			<div className="align-rt">
-				<div>${order.orderTotal.toFixed(2)}</div>
+				<div>{order.orderTotal.toFixed(2)} ETH</div>
 				<div className="smaller">
 					{order.totalQty} Item{order.totalQty > 1 ? 's' : ''}
 				</div>

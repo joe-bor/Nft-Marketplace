@@ -9,8 +9,9 @@
     background-color: var(--white);
     border: .2vmin solid var(--tan-3);
     border-radius: 1vmin;
-    font-size: 2vmin;
+    font-size: 3vmin;
     cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
 }
 
 .OrderListItem>div>div:first-child {
@@ -18,12 +19,14 @@
 }
 
 .OrderListItem.selected {
-    border-color: var(--orange);
+    box-shadow: 0 0 10px rgba(2, 62, 14, 0.5);
+    border-color: var(--green-yellow);
     border-width: .2vmin;
+    transform: scale(1.08);
     cursor: default;
 }
 
 .OrderListItem:not(.selected):hover {
-    border-color: var(--orange);
-    border-width: .2vmin;
+    transform: scale(1.08);
+    box-shadow: 0 0 10px rgba(0, 0, 128, 0.5);
 }
