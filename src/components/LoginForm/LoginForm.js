@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-service';
-import styles from './LoginForm.module.scss';
+
 
 export default function LoginForm({ setUser }) {
 	const [credentials, setCredentials] = useState({
@@ -28,8 +28,9 @@ export default function LoginForm({ setUser }) {
 		}
 	}
 
+	
 	return (
-		<div>
+		<div className='flex-ctr-ctr'>
 			<div className="form-container">
 				<form autoComplete="off" onSubmit={handleSubmit}>
 					<label>Email</label>

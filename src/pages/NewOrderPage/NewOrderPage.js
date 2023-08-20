@@ -26,19 +26,20 @@ export default function NewOrderPage({ coin }) {
 			setMenuItems(items);
 			// we use the first category in the array returned by .reduce above
 			// set it to activeCat state
-
+			
 			function randomCategoryGen(max) {
 				return Math.floor(Math.random() * max);
 			}
-
+			
 			setActiveCat(
 				categoriesRef.current[randomCategoryGen(categoriesRef.current.length)]
-			);
-		}
-		getItems();
-		async function getCart() {
-			const cart = await ordersAPI.getCart();
-			setCart(cart);
+				);
+			}
+			getItems();
+			async function getCart() {
+				const cart = await ordersAPI.getCart();
+				setCart(cart);
+
 		}
 		getCart();
 	}, []);

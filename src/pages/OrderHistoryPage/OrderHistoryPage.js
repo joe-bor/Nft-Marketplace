@@ -35,8 +35,9 @@ export default function OrderHistoryPage({ user, setUser }) {
 				<Link to="/orders/new" className="button btn-sm">
 					CREATE NEW ORDER
 				</Link>
-				<Logo imgPath={'https://i.imgur.com/ZdWnMsJ.png'}/>
-				<Logo  imgPath={'https://i.imgur.com/fSBjNCM.png'}/>
+				<Logo  imgPath={'https://i.imgur.com/uNrNggd.png'} text='Meta Mask'/>
+				<Logo imgPath={'https://i.imgur.com/ZdWnMsJ.png'} text='Ethereum'/>
+				<Logo  imgPath={'https://i.imgur.com/fSBjNCM.png'} text='Coin Gecko' />
 			</aside>
 			<OrderList
 				orders={orders}

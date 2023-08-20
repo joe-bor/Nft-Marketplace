@@ -4,16 +4,16 @@ import CoinPrice from '../CoinPrice/CoinPrice';
 function CoinPriceList({ coin }) {
 	const coinImgMapping = {
 		'avalanche-2': 'avax',
-		binancecoin: 'bnb',
-		bitcoin: 'btc',
-		cardano: 'ada',
-		dogecoin: 'doge',
-		ethereum: 'eth',
-		litecoin: 'ltc',
-		ripple: 'xrp',
+		"binancecoin": 'bnb',
+		"bitcoin": 'btc',
+		"cardano": 'ada',
+		"dogecoin": 'doge',
+		"ethereum": 'eth',
+		"litecoin": 'ltc',
+		"ripple": 'xrp',
 		'shiba-inu': 'shib',
-		uniswap: 'uni',
-		vechain: 'vet'
+		"uniswap": 'uni',
+		"vechain": 'vet'
 	};
 
 	const newCoins = Object.keys(coin).map((coinName) => {

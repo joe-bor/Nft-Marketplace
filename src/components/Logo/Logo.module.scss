@@ -10,10 +10,33 @@
     color: var(--tan-1);
     font-size: 2.7vmin;
     border: .6vmin solid var(--tan-1);
+
+    p {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        color: var(--yellow-1);
+        font-weight: 400;
+        margin: 0;
+    }
+    
+    &:hover p {
+        opacity: 1;
+        color: var(--yellow-1);
+        font-weight: 500;
+        font-size: 3.35vmin;
+    }
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 50%;
+        transition: opacity 0.4 ease;
+    }
+
+    &:hover img {
+        opacity: 0;
+    }
 }
 
-.Logo img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 50%;
-}
+

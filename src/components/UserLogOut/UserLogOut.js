@@ -23,9 +23,11 @@ export default function UserLogOut({ user, setUser }) {
 		<>
 			<div className={styles.welcome}>
 				<div>
-					{getGreeting()}, {user.name} !
+					{getGreeting()}
 				</div>
-				<div className={styles.email}>{user.email}</div>
+				<>
+					 {user.name}
+				</>
 			</div>
 			<div className={styles.UserLogOut}>
 				<button className="btn-sm" onClick={handleLogOut}>

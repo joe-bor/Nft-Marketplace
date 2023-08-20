@@ -1,7 +1,6 @@
 import styles from './CategoryList.module.scss';
 
 export default function CategoryList({ categories, activeCat, setActiveCat }) {
-	console.log(`activeCat: ${activeCat}`);
 	const cats = categories.map((cat) => (
 		<li
 			key={cat}
