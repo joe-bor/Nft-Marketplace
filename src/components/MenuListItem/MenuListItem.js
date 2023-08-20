@@ -6,6 +6,7 @@ export default function MenuListItem({ menuItem, handleAddToOrder }) {
 			<img
 				className={styles.emoji + ' ' + 'flex-ctr-ctr'}
 				src={menuItem.imgPath}
+				loading='lazy'
 			/>
 			<div className={styles.name}>{menuItem.name}</div>
 			<div className={styles.buy}>

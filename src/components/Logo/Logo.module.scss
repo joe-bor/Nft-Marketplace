@@ -11,7 +11,7 @@
     font-size: 2.7vmin;
     border: .6vmin solid var(--tan-1);
 
-    p {
+    a {
         position: absolute;
         opacity: 0;
         transition: opacity 0.4s ease;
@@ -20,7 +20,7 @@
         margin: 0;
     }
     
-    &:hover p {
+    &:hover a {
         opacity: 1;
         color: var(--yellow-1);
         font-weight: 500;
@@ -37,6 +37,7 @@
     &:hover img {
         opacity: 0;
     }
+
 }
 
 

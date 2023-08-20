@@ -1,7 +1,7 @@
 import styles from './Logo.module.scss';
 import { useState } from 'react';
 
-export default function Logo({ imgPath, text }) {
+export default function Logo({ imgPath, text, href }) {
 	const [isHovered, setIsHovered] = useState(false);
 	return (
 		<div className={styles.Logo} 
@@ -9,7 +9,7 @@ export default function Logo({ imgPath, text }) {
 		onMouseLeave={() => setIsHovered(false)}
 		>
 			<img src={imgPath}/>
-			<p>{text}</p>
+			<a href={href} target='_blank'>{text}</a>
 		</div>
 	);
 }

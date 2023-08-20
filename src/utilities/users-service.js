@@ -20,7 +20,6 @@ export async function login(credentials) {
 export function getToken() {
 	const token = localStorage.getItem('token');
 	// getItem will return null if no key
-	console.log(`${token}`)
 	if (!token) return null;
 	const payload = JSON.parse(atob(token.split('.')[1]));
 	// A JWT's expiration is expressed in seconds, not miliseconds

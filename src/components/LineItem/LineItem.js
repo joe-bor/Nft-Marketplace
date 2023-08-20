@@ -7,7 +7,7 @@ export default function LineItem({ lineItem, isPaid, handleChangeQty }) {
 			<div className="flex-ctr-ctr flex-col">
 				<span className="align-ctr heavierText">{lineItem.item.name}</span>
 				<span className='smaller'>
-					{lineItem.item.price.toFixed(2)} ETH <sub>/ea</sub>
+					{lineItem.item.price.toFixed(2)} ETH <sub className='smaller'>/ea</sub>
 				</span>
 			</div>
 			<div

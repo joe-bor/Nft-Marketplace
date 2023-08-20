@@ -161,7 +161,9 @@ function LineItem(_ref) {
     className: "align-ctr heavierText"
   }, lineItem.item.name), /*#__PURE__*/React.createElement("span", {
     className: "smaller"
-  }, lineItem.item.price.toFixed(2), " ETH ", /*#__PURE__*/React.createElement("sub", null, "/ea"))), /*#__PURE__*/React.createElement("div", {
+  }, lineItem.item.price.toFixed(2), " ETH ", /*#__PURE__*/React.createElement("sub", {
+    className: "smaller"
+  }, "/ea"))), /*#__PURE__*/React.createElement("div", {
     className: _LineItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].qty,
     style: {
       justifyContent: isPaid && 'center'
@@ -282,7 +284,8 @@ function LoginForm(_ref) {
 function Logo(_ref) {
   let {
     imgPath,
-    text
+    text,
+    href
   } = _ref;
   const [isHovered, setIsHovered] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   return /*#__PURE__*/React.createElement("div", {
@@ -291,7 +294,10 @@ function Logo(_ref) {
     onMouseLeave: () => setIsHovered(false)
   }, /*#__PURE__*/React.createElement("img", {
     src: imgPath
-  }), /*#__PURE__*/React.createElement("p", null, text));
+  }), /*#__PURE__*/React.createElement("a", {
+    href: href,
+    target: "_blank"
+  }, text));
 }
 
 /***/ }),
@@ -348,7 +354,8 @@ function MenuListItem(_ref) {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].MenuListItem
   }, /*#__PURE__*/React.createElement("img", {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].emoji + ' ' + 'flex-ctr-ctr',
-    src: menuItem.imgPath
+    src: menuItem.imgPath,
+    loading: "lazy"
   }), /*#__PURE__*/React.createElement("div", {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].name
   }, menuItem.name), /*#__PURE__*/React.createElement("div", {
@@ -409,27 +416,29 @@ function NavBar(_ref) {
   }
   const connectButtonOnClick = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(function* () {
-      if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
-        getAccount().then( /*#__PURE__*/function () {
-          var _ref3 = _asyncToGenerator(function* (response) {
-            const user = {
-              name: response,
-              email: "".concat(response, "@email"),
-              password: "".concat(response)
-            };
-            yield (0,_utilities_users_api__WEBPACK_IMPORTED_MODULE_2__.signUp)(user);
-            //! need to add jwt - follow token route
-            const authUser = yield _utilities_users_service__WEBPACK_IMPORTED_MODULE_3__.login({
-              "email": user.email,
-              "password": user.password
+      try {
+        if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
+          getAccount().then( /*#__PURE__*/function () {
+            var _ref3 = _asyncToGenerator(function* (response) {
+              const user = {
+                name: response,
+                email: "".concat(response, "@email"),
+                password: "".concat(response)
+              };
+              yield (0,_utilities_users_api__WEBPACK_IMPORTED_MODULE_2__.signUp)(user);
+              //! need to add jwt - follow token route
+              const authUser = yield _utilities_users_service__WEBPACK_IMPORTED_MODULE_3__.login({
+                "email": user.email,
+                "password": user.password
+              });
+              setUser(authUser);
             });
-            setUser(authUser);
-          });
-          return function (_x) {
-            return _ref3.apply(this, arguments);
-          };
-        }());
-      } else {
+            return function (_x) {
+              return _ref3.apply(this, arguments);
+            };
+          }());
+        }
+      } catch (error) {
         throw new Error('MetaMask Route Problems');
       }
     });
@@ -1097,13 +1106,16 @@ function OrderHistoryPage(_ref) {
     className: "button btn-sm"
   }, "CREATE NEW ORDER"), /*#__PURE__*/React.createElement(_components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], {
     imgPath: 'https://i.imgur.com/uNrNggd.png',
-    text: "Meta Mask"
+    text: "Meta Mask",
+    href: 'https://docs.metamask.io/wallet/reference/rpc-api/'
   }), /*#__PURE__*/React.createElement(_components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], {
     imgPath: 'https://i.imgur.com/ZdWnMsJ.png',
-    text: "Ethereum"
+    text: "Ethereum",
+    href: 'https://ethereum.org/en/'
   }), /*#__PURE__*/React.createElement(_components_Logo_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], {
     imgPath: 'https://i.imgur.com/fSBjNCM.png',
-    text: "Coin Gecko"
+    text: "Coin Gecko",
+    href: 'https://www.coingecko.com/en/api/documentation'
   })), /*#__PURE__*/React.createElement(_components_OrderList_OrderList__WEBPACK_IMPORTED_MODULE_3__["default"], {
     orders: orders,
     activeOrder: activeOrder,
@@ -1230,9 +1242,6 @@ function _sendRequest() {
         options.headers.Authorization = "Bearer ".concat(token);
       }
       const res = yield fetch(url, options);
-      console.log("\n\toptions: ".concat(Object.entries(options), ",\n\turl: ").concat(url, ",\n\tres: ").concat(url, "\n\t"));
-
-      // console.log('I WILL FIND YOU BUG!!')
       // res.ok will be false if the status code set to 4xx in the controller action
       if (res.ok) return res.json();
       throw new Error('Bad Request');
@@ -1312,7 +1321,6 @@ function _login() {
 function getToken() {
   const token = localStorage.getItem('token');
   // getItem will return null if no key
-  console.log("".concat(token));
   if (!token) return null;
   const payload = JSON.parse(atob(token.split('.')[1]));
   // A JWT's expiration is expressed in seconds, not miliseconds
@@ -1613,7 +1621,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.EDeinQzfS2N2rVW_Z1GP {
   font-size: 2.7vmin;
   border: 0.6vmin solid var(--tan-1);
 }
-.EDeinQzfS2N2rVW_Z1GP p {
+.EDeinQzfS2N2rVW_Z1GP a {
   position: absolute;
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -1621,7 +1629,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.EDeinQzfS2N2rVW_Z1GP {
   font-weight: 400;
   margin: 0;
 }
-.EDeinQzfS2N2rVW_Z1GP:hover p {
+.EDeinQzfS2N2rVW_Z1GP:hover a {
   opacity: 1;
   color: var(--yellow-1);
   font-weight: 500;
@@ -1635,7 +1643,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.EDeinQzfS2N2rVW_Z1GP {
 }
 .EDeinQzfS2N2rVW_Z1GP:hover img {
   opacity: 0;
-}`, "",{"version":3,"sources":["webpack://./src/components/Logo/Logo.module.scss"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,aAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,2BAAA;EACA,mBAAA;EACA,kBAAA;EACA,kCAAA;AACJ;AACI;EACI,kBAAA;EACA,UAAA;EACA,6BAAA;EACA,sBAAA;EACA,gBAAA;EACA,SAAA;AACR;AAEI;EACI,UAAA;EACA,sBAAA;EACA,gBAAA;EACA,mBAAA;AAAR;AAGI;EACI,eAAA;EACA,gBAAA;EACA,kBAAA;EACA,4BAAA;AADR;AAII;EACI,UAAA;AAFR","sourcesContent":[".Logo {\n    height: 18vmin;\n    width: 18vmin;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    border-radius: 50%;\n    background-color: var(--bg);\n    color: var(--tan-1);\n    font-size: 2.7vmin;\n    border: .6vmin solid var(--tan-1);\n\n    p {\n        position: absolute;\n        opacity: 0;\n        transition: opacity 0.4s ease;\n        color: var(--yellow-1);\n        font-weight: 400;\n        margin: 0;\n    }\n    \n    &:hover p {\n        opacity: 1;\n        color: var(--yellow-1);\n        font-weight: 500;\n        font-size: 3.35vmin;\n    }\n\n    img {\n        max-width: 100%;\n        max-height: 100%;\n        border-radius: 50%;\n        transition: opacity 0.4 ease;\n    }\n\n    &:hover img {\n        opacity: 0;\n    }\n}\n\n\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/Logo/Logo.module.scss"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,aAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,2BAAA;EACA,mBAAA;EACA,kBAAA;EACA,kCAAA;AACJ;AACI;EACI,kBAAA;EACA,UAAA;EACA,6BAAA;EACA,sBAAA;EACA,gBAAA;EACA,SAAA;AACR;AAEI;EACI,UAAA;EACA,sBAAA;EACA,gBAAA;EACA,mBAAA;AAAR;AAGI;EACI,eAAA;EACA,gBAAA;EACA,kBAAA;EACA,4BAAA;AADR;AAII;EACI,UAAA;AAFR","sourcesContent":[".Logo {\n    height: 18vmin;\n    width: 18vmin;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    border-radius: 50%;\n    background-color: var(--bg);\n    color: var(--tan-1);\n    font-size: 2.7vmin;\n    border: .6vmin solid var(--tan-1);\n\n    a {\n        position: absolute;\n        opacity: 0;\n        transition: opacity 0.4s ease;\n        color: var(--yellow-1);\n        font-weight: 400;\n        margin: 0;\n    }\n    \n    &:hover a {\n        opacity: 1;\n        color: var(--yellow-1);\n        font-weight: 500;\n        font-size: 3.35vmin;\n    }\n\n    img {\n        max-width: 100%;\n        max-height: 100%;\n        border-radius: 50%;\n        transition: opacity 0.4 ease;\n    }\n\n    &:hover img {\n        opacity: 0;\n    }\n\n}\n\n\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"Logo": `EDeinQzfS2N2rVW_Z1GP`

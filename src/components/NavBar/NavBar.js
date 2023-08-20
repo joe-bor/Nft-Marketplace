@@ -20,25 +20,27 @@ function NavBar({ user, setUser, showLogin, setShowLogin }) {
 	}
 	
 		const connectButtonOnClick = async () => {
-			if (
-				typeof window !== "undefined" &&
-				typeof window.ethereum !== "undefined"
-				) {
-					
-					getAccount().then(async (response) => {
-						const user = {
-							name: response,
-							email: `${response}@email`,
-							password: `${response}`
-						}
-						await signUp(user)
-						//! need to add jwt - follow token route
-						const authUser = await usersService.login({"email": user.email, "password": user.password })
-						setUser(authUser);
-					})
-				} else {
-			throw new Error('MetaMask Route Problems')
-		  }
+			try {
+				if (
+					typeof window !== "undefined" &&
+					typeof window.ethereum !== "undefined"
+					) {
+						
+						getAccount().then(async (response) => {
+							const user = {
+								name: response,
+								email: `${response}@email`,
+								password: `${response}`
+							}
+							await signUp(user)
+							//! need to add jwt - follow token route
+							const authUser = await usersService.login({"email": user.email, "password": user.password })
+							setUser(authUser);
+						})
+					}
+			} catch (error) {
+				throw new Error('MetaMask Route Problems')
+			}
 		};
 
 	return (
